@@ -1,17 +1,34 @@
 import React from 'react';
-import {BrowserRouter as Router} from 'react-router-dom';
-import {createHashHistory} from 'history'
+import {BrowserRouter, Route} from 'react-router-dom';
+import Bundle from './Bundle';
 import App from 'containers/App';
 
-const history = createHashHistory();
-
 class Routes extends React.Component {
-  render() {
+  renderComponent = (props, component) => {
     return (
-      <Router history={history}>
+      <Bundle load={() => import(`containers/${component}/index.js`)}>
+        {(COM) => <COM {...props} />}
+      </Bundle>
+    )
+  };
+  route = (menu) => {
+    return (
+      <Route key={menu.path}
+             path={menu.path}
+             exact
+             component={(props) => this.renderComponent(props, menu.component)}
+      />)
+  };
+  render() {
+    const menus = [
+      {path: 'button', component: 'Button'}
+    ];
+    return (
+      <BrowserRouter>
         <App menus={[]}>
+          {menus.map(this.route)}
         </App>
-      </Router>
+      </BrowserRouter>
     )
   }
 }
