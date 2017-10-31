@@ -1,0 +1,2 @@
+# ym-component
+react-component
