@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Layout} from 'components';
+import AppMenu from './AppMenu';
+import './App.less';
 
 class App extends React.Component {
   render() {
@@ -10,9 +12,17 @@ class App extends React.Component {
         <Layout.Header>
           header
         </Layout.Header>
-        <Layout.Content>
-          {children}
-        </Layout.Content>
+        <Layout>
+          <Layout.Sider>
+            <AppMenu />
+          </Layout.Sider>
+          <Layout.Content>
+            content
+          </Layout.Content>
+        </Layout>
+        <Layout.Footer>
+          footer
+        </Layout.Footer>
       </Layout>
     )
   }

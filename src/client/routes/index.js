@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 import Bundle from './Bundle';
-import App from 'containers/App';
+import App from 'containers/app';
 
 class Routes extends React.Component {
   renderComponent = (props, component) => {

@@ -1,0 +1,34 @@
+@import "../../style/default";
+
+.ym-layout {
+  width: 100%;
+  height: 100%;
+  background-color: darkgrey;
+  display: flex;
+  flex-direction: column;
+
+  &&-has-sider {
+    flex-direction: row;
+  }
+  &-header,
+  &-footer {
+    flex: 0 0 auto;
+  }
+  &-sider {
+    width: @layout-sider-width;
+    height: 100%;
+    background-color: coral;
+  }
+  &-header {
+    background-color: bisque;
+    height: @layout-header-height;
+    line-height: @layout-header-height;
+  }
+  &-footer {
+    background-color: gold;
+  }
+  &-content {
+    background-color: cadetblue;
+    flex: auto;
+  }
+}

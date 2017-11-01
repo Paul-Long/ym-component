@@ -1,5 +1,7 @@
-import Layout from './Layout';
+import Layout from './layout';
+import Menu from './menu';
 
 export {
-  Layout
+  Layout,
+  Menu
 }

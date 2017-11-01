@@ -87,7 +87,7 @@ const config = {
       loaders: ['style-loader', 'css-loader', 'less-loader', 'postcss-loader']
     }),
     new HtmlWebpackPlugin({
-      title: 'ym-component',
+      title: 'YM',
       favicon: './src/server/static/images/favicon.ico',
       template: path.join(__dirname, 'src/server/template/index.html'),
       chunks: ['manifest', 'vendor', 'common', 'main'],
