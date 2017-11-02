@@ -17,7 +17,7 @@ class App extends React.Component {
             <AppMenu />
           </Layout.Sider>
           <Layout.Content>
-            content
+            {children}
           </Layout.Content>
         </Layout>
         <Layout.Footer>

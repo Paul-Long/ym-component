@@ -1,10 +1,10 @@
 import React from 'react';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Bundle from './Bundle';
 import App from 'containers/app';
 
 class Routes extends React.Component {
-  renderComponent = (props, component) => {
+  r_component = (props, component) => {
     return (
       <Bundle load={() => import(`containers/${component}/index.js`)}>
         {(COM) => <COM {...props} />}
@@ -16,17 +16,22 @@ class Routes extends React.Component {
       <Route key={menu.path}
              path={menu.path}
              exact
-             component={(props) => this.renderComponent(props, menu.component)}
+             component={(props) => this.r_component(props, menu.component)}
       />)
   };
   render() {
     const menus = [
-      {path: 'button', component: 'Button'}
+      {path: '/', component: 'home'},
+      {path: '/button', component: 'button'},
+      {path: '/menu', component: 'menu'},
+      {path: '/layout', component: 'layout'}
     ];
     return (
       <BrowserRouter>
         <App menus={[]}>
-          {menus.map(this.route)}
+          <Switch>
+            {menus.map(this.route)}
+          </Switch>
         </App>
       </BrowserRouter>
     )

@@ -30,7 +30,9 @@ class SubMenu extends React.Component {
     return (
       <li className={liCls}>
         {this.r_title()}
-        {this.r_children()}
+        <ul style={this.g_style()}>
+          {this.r_children()}
+        </ul>
       </li>
     )
   }

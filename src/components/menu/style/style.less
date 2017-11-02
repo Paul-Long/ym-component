@@ -2,12 +2,24 @@
 
 .ym-menu {
   outline: none;
-  margin-bottom: 0;
   padding-left: 0;
   list-style: none;
   z-index: 99999;
   box-shadow: @box-shadow-base;
   border-radius: 3px;
   color: #666;
-  line-height: 46px;
+  line-height: @menu-item-height;
+  margin: 0;
+  li {
+    list-style: none;
+  }
+  &-item {
+    a {
+      text-decoration: none;
+      width: 100%;
+      height: @menu-item-height;
+      display: block;
+      color: #666666;
+    }
+  }
 }

@@ -1,13 +1,13 @@
 import React from 'react';
 
-class Button extends React.Component {
+class DemoButton extends React.Component {
   render() {
     return (
-      <div>
-        button
+      <div className='ym-demo-button'>
+        <h1>Button</h1>
       </div>
     )
   }
 }
 
-export default Button;
+export default DemoButton;
