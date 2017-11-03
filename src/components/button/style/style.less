@@ -1,0 +1,25 @@
+@import "../../style/default";
+@import "./mixin";
+
+.ym-btn {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  &-size-small {
+    padding: 5px 10px;
+  }
+  &-size-default {
+    padding: 6px 11px;
+  }
+  &-size-large {
+    padding: 7px 12px;
+  }
+  &-default {
+    .button-color(@btn-color-default, @bg-color-default, @btn-border-color);
+  }
+  &-primary {
+    .button-color(@btn-color-primary, @bg-color-primary, @btn-border-color)
+  }
+  &-danger {
+    .button-color(@btn-color-danger, @bg-color-default, @btn-border-color);
+  }
+}

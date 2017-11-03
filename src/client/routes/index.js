@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {HashRouter, Route, Switch} from 'react-router-dom';
 import Bundle from './Bundle';
 import App from 'containers/app';
 
@@ -19,6 +19,7 @@ class Routes extends React.Component {
              component={(props) => this.r_component(props, menu.component)}
       />)
   };
+
   render() {
     const menus = [
       {path: '/', component: 'home'},
@@ -27,13 +28,13 @@ class Routes extends React.Component {
       {path: '/layout', component: 'layout'}
     ];
     return (
-      <BrowserRouter>
+      <HashRouter>
         <App menus={[]}>
           <Switch>
             {menus.map(this.route)}
           </Switch>
         </App>
-      </BrowserRouter>
+      </HashRouter>
     )
   }
 }
