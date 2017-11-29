@@ -8,7 +8,9 @@ import './style';
 class Menu extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      eventKey: null
+    };
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -21,11 +23,19 @@ class Menu extends React.Component {
     return classNames(['ym-menu', `ym-menu-${theme}`, `ym-menu-${mode}`, className]);
   };
 
+  h_itemClick = (eventKey) => {
+    console.log(eventKey);
+    this.setState({eventKey});
+  };
+
   r_children = () => {
     const {children, level = 0} = this.props;
     return React.Children.map(children, ele => {
+      let eventKey = ele.key;
       return React.cloneElement(ele, {
-        level: level
+        level: level,
+        eventKey,
+        onClick: this.h_itemClick
       });
     })
   };
