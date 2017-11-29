@@ -118,10 +118,10 @@ if (ENV === 'production') {
   });
   config.plugins.push(UglifyJs);
 
-  const isTest = true;
-  if (isTest) {
-    const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-    config.plugins.push(new BundleAnalyzerPlugin());
-  }
+  //const isTest = true;
+  //if (isTest) {
+  //  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+  //  config.plugins.push(new BundleAnalyzerPlugin());
+  //}
 }
 module.exports = config;
