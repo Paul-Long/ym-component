@@ -7,9 +7,9 @@
   z-index: 99999;
   box-shadow: @box-shadow-base;
   border-radius: 3px;
-  color: #666;
   line-height: @menu-item-height;
   margin: 0;
+  box-sizing: border-box;
   li {
     list-style: none;
   }
@@ -19,7 +19,18 @@
       width: 100%;
       height: @menu-item-height;
       display: block;
-      color: #666666;
+      color: inherit;
     }
+  }
+  &-item, &-submenu-title {
+    border-bottom: 1px solid @shadow-color;
+  }
+  &-light {
+    color: @menu-color;
+    background: @menu-bg-color;
+  }
+  &-dark {
+    color: @menu-color-dark;
+    background: @menu-bg-color-dark;
   }
 }

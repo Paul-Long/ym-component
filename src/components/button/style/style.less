@@ -3,23 +3,29 @@
 
 .ym-btn {
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: 3px;
+  outline: none;
+  &,
+  &:active,
+  &:focus {
+    outline: 0;
+  }
   &-size-small {
-    padding: 5px 10px;
+    .button-size(@btn-height-sm, @btn-padding-sm, @btn-font-size-base, @btn-font-radius-base);
   }
   &-size-default {
-    padding: 6px 11px;
+    .button-size(@btn-height-base, @btn-padding-base, @btn-font-size-base, @btn-font-radius-base);
   }
   &-size-large {
-    padding: 7px 12px;
+    .button-size(@btn-height-lg, @btn-padding-lg, @btn-font-size-lg, @btn-font-radius-lg);
   }
   &-default {
-    .button-color(@btn-color-default, @bg-color-default, @btn-border-color);
+    .button-type-color(@btn-color-default, @bg-color-default, @btn-border-color);
   }
   &-primary {
-    .button-color(@btn-color-primary, @bg-color-primary, @btn-border-color)
+    .button-type-color(@btn-color-primary, @bg-color-primary, @btn-border-color);
   }
   &-danger {
-    .button-color(@btn-color-danger, @bg-color-default, @btn-border-color);
+    .button-type-color(@btn-color-primary, @btn-color-danger, @btn-border-color);
   }
 }

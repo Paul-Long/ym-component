@@ -10,3 +10,16 @@
   border-radius: @border-radius;
   height: @height;
 }
+
+.button-type-color(@color, @background, @border) {
+  .button-color(@color, @background, @border);
+  &:hover,
+  &:focus {
+    .button-color(@color; ~`colorPalette("@{background}", 5)`; ~`colorPalette("@{border}", 5)`);
+  }
+
+  &:active,
+  &.active {
+    .button-color(@color; ~`colorPalette("@{background}", 7)`; ~`colorPalette("@{border}", 7)`);
+  }
+}

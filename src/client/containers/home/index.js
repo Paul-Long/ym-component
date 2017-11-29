@@ -4,7 +4,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className='ym-home'>
-        <h1>Home</h1>
+        <h1>组件库简介</h1>
       </div>
     )
   }

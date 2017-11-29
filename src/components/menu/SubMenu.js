@@ -25,7 +25,7 @@ class SubMenu extends React.Component {
   };
 
   render() {
-    const {className, children, level} = this.props;
+    const {className} = this.props;
     let liCls = classNames(['ym-menu-submenu', className || '']);
     return (
       <li className={liCls}>
