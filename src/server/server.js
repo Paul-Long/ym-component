@@ -4,12 +4,15 @@ const webpack = require('webpack');
 const webpackConfig = require('../../webpack.config');
 const webpackDevMiddleWare = require('webpack-dev-middleware');
 const webpackHotMiddleWare = require('webpack-hot-middleware');
-const compiler = webpack(webpackConfig);
-app.use(webpackDevMiddleWare(compiler, {
-  noInfo: true,
-  publicPath: webpackConfig.output.publicPath
-}));
-app.use(webpackHotMiddleWare(compiler));
+const ENV = process.env.NODE_ENV;
+if (ENV === 'develpoment') {
+  const compiler = webpack(webpackConfig);
+  app.use(webpackDevMiddleWare(compiler, {
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath
+  }));
+  app.use(webpackHotMiddleWare(compiler));
+}
 
 app.use(express.static(webpackConfig.output.path));
 app.get('*', (req, res) => {
