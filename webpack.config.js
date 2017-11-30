@@ -52,8 +52,11 @@ const config = {
         include: path.resolve(__dirname, './src/client'),
         use: 'url-loader?limit=100&name=img/[name].[hash:8].[ext]'
       }, {
-        test: /\.(ttf)$/,
-        include: path.resolve(__dirname, './src/client'),
+        test: /\.(ttf|svg|eot|woff)$/,
+        include: [
+          path.resolve(__dirname, './src/client'),
+          path.resolve(__dirname, './src/components')
+        ],
         use: 'url-loader?limit=100&name=fonts/[name].[hash:8].[ext]'
       }
     ]

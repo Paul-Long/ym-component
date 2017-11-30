@@ -1,4 +1,5 @@
 @import "../../style/default";
+@import "mixin";
 
 .ym-menu {
   outline: none;
@@ -26,27 +27,9 @@
     border-bottom: 1px solid @shadow-color;
   }
   &-light {
-    color: @menu-color;
-    background: @menu-bg-color;
-    .ym-menu-item {
-      &:hover, &:focus {
-        color: ~`colorPalette("@{menu-color}", 5)`;
-      }
-      &:active, &.active {
-        color: ~`colorPalette("@{menu-color}", 7)`;
-      }
-    }
+    .menu-item-color(@menu-color, @menu-bg-color);
   }
   &-dark {
-    color: @menu-color-dark;
-    background: @menu-bg-color-dark;
-    .ym-menu-item {
-      &:hover, &:focus {
-        color: ~`colorPalette("@{menu-color-dark}", 5)`;
-      }
-      &:active, &.active {
-        color: ~`colorPalette("@{menu-color-dark}", 7)`;
-      }
-    }
+    .menu-item-color(@menu-color-dark, @menu-bg-color-dark);
   }
 }

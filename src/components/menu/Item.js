@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 class Item extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log(props);
-  }
   g_style = () => {
     const {style, level} = this.props;
     let cusStyle = {};
@@ -22,6 +18,7 @@ class Item extends React.Component {
 
   render() {
     const {className, children} = this.props;
+    console.log(this.props.active);
     let liCls = classNames(['ym-menu-item', className || '']);
     return (
       <li className={liCls} style={this.g_style()} onClick={this.h_click}>

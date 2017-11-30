@@ -3,13 +3,14 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import Item from './Item';
 import SubMenu from './SubMenu';
+import {renderChild} from './MenuMixin';
 import './style';
 
 class Menu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      eventKey: null
+      activeKey: null
     };
   }
 
@@ -24,20 +25,12 @@ class Menu extends React.Component {
   };
 
   h_itemClick = (eventKey) => {
-    console.log(eventKey);
-    this.setState({eventKey});
+    this.setState({activeKey: eventKey});
   };
 
   r_children = () => {
-    const {children, level = 0} = this.props;
-    return React.Children.map(children, ele => {
-      let eventKey = ele.key;
-      return React.cloneElement(ele, {
-        level: level,
-        eventKey,
-        onClick: this.h_itemClick
-      });
-    })
+    const {children} = this.props;
+    return React.Children.map(children, (ele, i, subIndex) => renderChild.call(this, ele, i, subIndex));
   };
 
   render() {

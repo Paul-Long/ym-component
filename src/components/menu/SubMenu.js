@@ -1,14 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import {renderChild} from './MenuMixin';
 
 class SubMenu extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeKey: null
+    };
+  }
+
   g_style = () => {
     const {style, level} = this.props;
     let cusStyle = {};
     cusStyle.paddingLeft = `${level * 12}px`;
     return Object.assign({}, style, cusStyle);
   };
+
   r_title = () => {
     const {title} = this.props;
     return (
@@ -17,11 +26,14 @@ class SubMenu extends React.Component {
       </div>
     )
   };
+
+  h_itemClick = (eventKey) => {
+    this.setState({activeKey: eventKey});
+  };
+  
   r_children = () => {
     const {children, level} = this.props;
-    return React.Children.map(children, ele => {
-      return React.cloneElement(ele, {level: level + 1});
-    })
+    return React.Children.map(children, (ele, i, subIndex) => renderChild.call(this, ele, i, subIndex, {level: level + 1}))
   };
 
   render() {
