@@ -14,7 +14,7 @@ class AppMenu extends React.Component {
           <Item key='3'><Link to='/icon' replace>ICON</Link></Item>
         </SubMenu>
         <SubMenu title='数据组件'>
-          <Item key='4'>TABLE</Item>
+          <Item key='4'><Link to='/table' replace>TABLE</Link></Item>
         </SubMenu>
         <SubMenu title='布局组件'>
           <Item key='5'><Link to='/layout' replace>LAYOUT</Link></Item>

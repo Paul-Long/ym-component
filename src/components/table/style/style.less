@@ -1,0 +1,41 @@
+@import "../../style/default";
+
+@ym-table: ~'ym-table';
+
+.@{ym-table}-box {
+  border-top: 1px solid @table-header-border-color;
+  border-left: 1px solid @table-header-border-color;
+  * {
+    box-sizing: border-box;
+  }
+  table {
+    border-spacing: 0;
+  }
+}
+
+.@{ym-table} {
+  width: 100%;
+  height: 100%;
+  &-header {
+    height: @table-header-height;
+    background: @table-header-bg-color;
+    table, tr {
+      border-collapse: collapse;
+    }
+    th {
+      border-right: 1px solid @table-header-border-color;
+      border-bottom: 1px solid @table-header-border-color;
+      height: @table-header-height - 1px;
+    }
+  }
+  &-body {
+    table, tr {
+      border-collapse: collapse;
+    }
+    td {
+      border-right: 1px solid @table-header-border-color;
+      border-bottom: 1px solid @table-header-border-color;
+      height: @table-header-height - 1px;
+    }
+  }
+}

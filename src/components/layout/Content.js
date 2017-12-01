@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 class Content extends React.Component {
   render() {
-    const {children} = this.props;
+    const {children, className} = this.props;
+    let contentCls = classNames(['ym-layout-content', className || '']);
     return (
-      <div className='ym-layout-content'>
+      <div className={contentCls}>
         {children}
       </div>
     )

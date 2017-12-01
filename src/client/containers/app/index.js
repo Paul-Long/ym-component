@@ -16,7 +16,7 @@ class App extends React.Component {
           <Layout.Sider>
             <AppMenu />
           </Layout.Sider>
-          <Layout.Content>
+          <Layout.Content className='ym-app-content'>
             {children}
           </Layout.Content>
         </Layout>

@@ -26,6 +26,7 @@ class Routes extends React.Component {
       {path: '/button', component: 'button'},
       {path: '/menu', component: 'menu'},
       {path: '/layout', component: 'layout'},
+      {path: '/table', component: 'table'},
       {path: '/icon', component: 'icon'}
     ];
     return (
