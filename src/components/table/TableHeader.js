@@ -31,7 +31,7 @@ class TableHeader extends React.Component {
       return (
         <th key={col.field}
             data-field={fieldCls}
-            className={className}
+            className={fieldCls}
             style={style}
         >
           {title}
