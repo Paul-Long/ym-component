@@ -6,7 +6,7 @@ class TableBody extends React.Component {
     return columns.map(col => {
       const {field, width = 100, align = 'center'} = col;
       let style = {width, textAlign: align};
-      let fielddCls = `ym-table-filed-${field}`;
+      let fieldCls = `ym-table-filed-${field}`;
       return (
         <td key={col.field}
             className={fieldCls}
