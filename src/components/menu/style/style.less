@@ -1,20 +1,23 @@
 @import "../../style/default";
+@import "../../style/flex";
 @import "mixin";
-
-.ym-menu {
+@ym-menu: ~'ym-menu';
+.@{ym-menu} {
   outline: none;
   padding-left: 0;
   list-style: none;
   z-index: 99999;
   box-shadow: @box-shadow-base;
-  border-radius: 3px;
+  border-radius: 2px;
   line-height: @menu-item-height;
   margin: 0;
   box-sizing: border-box;
+  border-right: 1px solid @black;
   li {
     list-style: none;
   }
   &-item {
+    user-select: none;
     a {
       text-decoration: none;
       width: 100%;
@@ -23,13 +26,24 @@
       color: inherit;
     }
   }
-  &-item, &-submenu-title {
-    border-bottom: 1px solid @shadow-color;
+  &-submenu {
+    &-child {
+      display: none;
+    }
+  }
+  &-submenu-opened {
+    .@{ym-menu}-submenu-child {
+      display: block;
+    }
+  }
+  &-submenu-title {
+    padding-right: 5px;
+    cursor: pointer;
   }
   &-light {
-    .menu-item-color(@menu-color, @menu-bg-color);
+    .menu-item-color(@menu-color, @menu-bg-color, @menu-bg-color, @white);
   }
   &-dark {
-    .menu-item-color(@menu-color-dark, @menu-bg-color-dark);
+    .menu-item-color(@menu-color-dark, @menu-bg-color-dark, @black, @menu-color);
   }
 }
