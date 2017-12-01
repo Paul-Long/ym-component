@@ -23,6 +23,7 @@
       border-collapse: collapse;
     }
     th {
+      position: relative;
       border-right: 1px solid @table-header-border-color;
       border-bottom: 1px solid @table-header-border-color;
       height: @table-header-height - 1px;
@@ -37,5 +38,13 @@
       border-bottom: 1px solid @table-header-border-color;
       height: @table-header-height - 1px;
     }
+  }
+  &-resize {
+    width: 5px;
+    position: absolute;
+    height: @table-header-height - 1px;
+    top: 0;
+    right: 0;
+    cursor: col-resize;
   }
 }

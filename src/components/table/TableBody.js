@@ -4,9 +4,16 @@ class TableBody extends React.Component {
   r_tr = (row) => {
     const {columns = []} = this.props;
     return columns.map(col => {
-      const {width = 100, align = 'center'} = col;
+      const {field, width = 100, align = 'center'} = col;
       let style = {width, textAlign: align};
-      return (<td key={col.field} style={style}>{row[col.field]}</td>)
+      let className = `ym-table-filed-${field}`;
+      return (
+        <td key={col.field}
+            className={className}
+            data-field={field}
+            style={style}
+        >{row[col.field]}</td>
+      )
     });
   };
   r_data = () => {
