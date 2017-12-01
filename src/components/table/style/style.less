@@ -38,6 +38,14 @@
       border-bottom: 1px solid @table-header-border-color;
       height: @table-header-height - 1px;
     }
+    .@{ym-table}-tr {
+      &-hover {
+        background: @table-header-bg-color;
+      }
+      &-clicked {
+        background: red;
+      }
+    }
   }
   &-resize {
     width: 5px;
