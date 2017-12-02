@@ -1,13 +1,4 @@
-import React from 'react';
-
-class Checkbox extends React.Component {
-  render() {
-    return (
-      <div>
-        <input type='checkbox' checked/>
-      </div>
-    )
-  }
-}
+import './style';
+import Checkbox from './Checkbox';
 
 export default Checkbox;

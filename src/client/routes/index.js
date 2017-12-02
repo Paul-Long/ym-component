@@ -27,7 +27,8 @@ class Routes extends React.Component {
       {path: '/menu', component: 'menu'},
       {path: '/layout', component: 'layout'},
       {path: '/table', component: 'table'},
-      {path: '/icon', component: 'icon'}
+      {path: '/icon', component: 'icon'},
+      {path: '/checkbox', component: 'checkbox'}
     ];
     return (
       <HashRouter>

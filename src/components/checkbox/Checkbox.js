@@ -10,6 +10,28 @@ class Checkbox extends React.Component {
     }
   }
 
+  h_change = (e) => {
+    const {onChange, disabled} = this.props;
+    if (disabled) {
+      return null;
+    }
+    this.setState({checked: !this.state.checked});
+    if (typeof onChange === 'function') {
+      onChange({
+        target: {
+          ...this.props,
+          checked: e.target.checked,
+        },
+        stopPropagation() {
+          e.stopPropagation();
+        },
+        preventDefault() {
+          e.preventDefault();
+        },
+      });
+    }
+  };
+
   render() {
     const {className = '', prefixCls, disabled} = this.props;
     const {checked} = this.state;
@@ -19,7 +41,12 @@ class Checkbox extends React.Component {
     });
     return (
       <div className={checkboxCls}>
-
+        <input type='checkbox'
+               className={`${prefixCls}-input`}
+               checked={!!checked}
+               onChange={this.h_change}
+        />
+        <span className={`${prefixCls}-inner`}/>
       </div>
     )
   }
@@ -29,7 +56,8 @@ export default Checkbox;
 
 Checkbox.propTypes = {
   prefixCls: PropTypes.string,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  onChange: PropTypes.func
 };
 Checkbox.defaultProps = {
   prefixCls: 'ym-checkbox',
