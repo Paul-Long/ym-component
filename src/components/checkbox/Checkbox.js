@@ -6,7 +6,7 @@ class Checkbox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: false
+      checked: 'checked' in props ? props.checked : props.defaultChecked
     }
   }
 
@@ -33,21 +33,25 @@ class Checkbox extends React.Component {
   };
 
   render() {
-    const {className = '', prefixCls, disabled} = this.props;
+    const {className = '', prefixCls, disabled, children, ...other} = this.props;
     const {checked} = this.state;
     let checkboxCls = classNames(prefixCls, className, {
       [`${prefixCls}-checked`]: checked,
       [`${prefixCls}-disabled`]: disabled
     });
     return (
-      <div className={checkboxCls}>
-        <input type='checkbox'
-               className={`${prefixCls}-input`}
-               checked={!!checked}
-               onChange={this.h_change}
-        />
-        <span className={`${prefixCls}-inner`}/>
-      </div>
+      <label className={`${prefixCls}-wrapper`}>
+        <span className={checkboxCls}>
+          <input type='checkbox'
+                 className={`${prefixCls}-input`}
+                 checked={!!checked}
+                 onChange={this.h_change}
+                 {...other}
+          />
+          <span className={`${prefixCls}-inner`}/>
+        </span>
+        <span className={`${prefixCls}-child`}>{children}</span>
+      </label>
     )
   }
 }
@@ -57,9 +61,11 @@ export default Checkbox;
 Checkbox.propTypes = {
   prefixCls: PropTypes.string,
   disabled: PropTypes.bool,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  defaultChecked: PropTypes.bool
 };
 Checkbox.defaultProps = {
   prefixCls: 'ym-checkbox',
-  disabled: false
+  disabled: false,
+  defaultChecked: false
 };
