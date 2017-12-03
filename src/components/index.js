@@ -5,6 +5,7 @@ import Icon from './icon';
 import Table from './table';
 import Checkbox from './checkbox';
 import Radio from './radio';
+import Input from './input';
 
 export {
   Layout,
@@ -13,5 +14,6 @@ export {
   Icon,
   Table,
   Checkbox,
-  Radio
+  Radio,
+  Input
 }

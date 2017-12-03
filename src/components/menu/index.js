@@ -20,8 +20,8 @@ class Menu extends React.Component {
   }
 
   g_className = () => {
-    const {className, theme, mode} = this.props;
-    return classNames(['ym-menu', `ym-menu-${theme}`, `ym-menu-${mode}`, className]);
+    const {className, theme, mode, prefixCls} = this.props;
+    return classNames([prefixCls, `${prefixCls}-${theme}`, `${prefixCls}-${mode}`, className || '']);
   };
 
   h_itemClick = (eventKey) => {
@@ -47,6 +47,7 @@ class Menu extends React.Component {
 Menu.propTypes = {
   theme: PropTypes.oneOf(['light', 'dark']),
   mode: PropTypes.oneOf(['vertical', 'horizontal', 'inline']),
+  prefixCls: PropTypes.string,
   selectedKeys: PropTypes.array,
   className: PropTypes.string,
   style: PropTypes.object,
@@ -54,7 +55,8 @@ Menu.propTypes = {
 };
 Menu.defaultProps = {
   theme: 'light',
-  mode: 'vertical'
+  mode: 'vertical',
+  prefixCls: 'ym-menu'
 };
 Menu.Item = Item;
 Menu.SubMenu = SubMenu;

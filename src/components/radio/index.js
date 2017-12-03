@@ -1,13 +1,4 @@
-import React from 'react';
-
-class Radio extends React.Component {
-  render() {
-    return (
-      <div>
-
-      </div>
-    )
-  }
-}
+import './style';
+import Radio from './Radio';
 
 export default Radio;

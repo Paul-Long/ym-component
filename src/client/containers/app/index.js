@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Layout} from 'components';
 import AppMenu from './AppMenu';
+import AppHeader from './AppHeader';
 import './App.less';
 
 class App extends React.Component {
@@ -9,9 +10,7 @@ class App extends React.Component {
     const {children} = this.props;
     return (
       <Layout className='ym-app'>
-        <Layout.Header>
-          header
-        </Layout.Header>
+        <AppHeader/>
         <Layout>
           <Layout.Sider>
             <AppMenu />

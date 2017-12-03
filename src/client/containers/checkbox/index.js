@@ -6,7 +6,7 @@ class DemoCheckbox extends React.Component {
     return (
       <div className='ym-demo-checkbox'>
         <h1>Checkbox</h1>
-        <Checkbox checked disabled={true}>中华好面点</Checkbox>
+        <Checkbox checked>中华好面点</Checkbox>
       </div>
     )
   }

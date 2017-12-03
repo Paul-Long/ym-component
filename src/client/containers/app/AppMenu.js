@@ -15,10 +15,12 @@ class AppMenu extends React.Component {
         </SubMenu>
         <SubMenu title='数据组件'>
           <Item key='5'><Link to='/checkbox' replace>CHECKBOX</Link></Item>
-          <Item key='6'><Link to='/table' replace>TABLE</Link></Item>
+          <Item key='6'><Link to='/radio' replace>RADIO</Link></Item>
+          <Item key='7'><Link to='/table' replace>TABLE</Link></Item>
+          <Item key='8'><Link to='/input' replace>INPUT</Link></Item>
         </SubMenu>
         <SubMenu title='布局组件'>
-          <Item key='7'><Link to='/layout' replace>LAYOUT</Link></Item>
+          <Item key='9'><Link to='/layout' replace>LAYOUT</Link></Item>
         </SubMenu>
       </Menu>
     )

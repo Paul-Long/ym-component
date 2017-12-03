@@ -33,7 +33,7 @@ class Checkbox extends React.Component {
   };
 
   render() {
-    const {className = '', prefixCls, disabled, children, ...other} = this.props;
+    const {className = '', prefixCls, disabled, type, children, ...other} = this.props;
     const {checked} = this.state;
     let checkboxCls = classNames(prefixCls, className, {
       [`${prefixCls}-checked`]: checked,
@@ -42,7 +42,7 @@ class Checkbox extends React.Component {
     return (
       <label className={`${prefixCls}-wrapper`}>
         <span className={checkboxCls}>
-          <input type='checkbox'
+          <input type={type}
                  className={`${prefixCls}-input`}
                  checked={!!checked}
                  onChange={this.h_change}
@@ -62,10 +62,12 @@ Checkbox.propTypes = {
   prefixCls: PropTypes.string,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
-  defaultChecked: PropTypes.bool
+  defaultChecked: PropTypes.bool,
+  type: PropTypes.string
 };
 Checkbox.defaultProps = {
   prefixCls: 'ym-checkbox',
   disabled: false,
-  defaultChecked: false
+  defaultChecked: false,
+  type: 'checkbox'
 };
