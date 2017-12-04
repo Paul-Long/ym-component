@@ -1,5 +1,6 @@
 import React from 'react';
 import {Layout} from 'components';
+import './blog.less';
 
 class BlogApp extends React.Component {
   constructor(props) {

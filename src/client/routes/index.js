@@ -41,12 +41,12 @@ class Routes extends React.Component {
       {path: '/iframe', parent: 'examples', component: 'iframe'}
     ];
     const blogMenu = [
-      {path: 'home', parent: 'blog', component: 'home'}
+      {path: '/home', parent: 'blog', component: 'home'}
     ];
     return (
       <HashRouter>
         <Switch>
-          <Route path='/examples' component={() => (<App>{menus.map(this.route)}</App>)} />
+          <Route path='/examples' component={App}/>
           <Route path='/blog' component={() => (<BlogApp>{blogMenu.map(this.route)}</BlogApp>)} />
         </Switch>
       </HashRouter>
