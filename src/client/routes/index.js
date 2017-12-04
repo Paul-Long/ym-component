@@ -2,6 +2,7 @@ import React from 'react';
 import {HashRouter, Route, Switch} from 'react-router-dom';
 import Bundle from './Bundle';
 import App from 'examples@containers/app';
+import BlogApp from 'blog@containers/app/index';
 
 class Routes extends React.Component {
   r_component = (props, parent, component) => {
@@ -20,7 +21,7 @@ class Routes extends React.Component {
   route = (menu) => {
     return (
       <Route key={menu.path}
-             path={menu.path}
+             path={'/' + menu.parent + menu.path}
              exact
              component={(props) => this.r_component(props, menu.parent, menu.component)}
       />)
@@ -28,7 +29,7 @@ class Routes extends React.Component {
 
   render() {
     const menus = [
-      {path: '/', parent: 'examples', component: 'home'},
+      {path: '/home', parent: 'examples', component: 'home'},
       {path: '/button', parent: 'examples', component: 'button'},
       {path: '/menu', parent: 'examples', component: 'menu'},
       {path: '/layout', parent: 'examples', component: 'layout'},
@@ -37,16 +38,17 @@ class Routes extends React.Component {
       {path: '/checkbox', parent: 'examples', component: 'checkbox'},
       {path: '/radio', parent: 'examples', component: 'radio'},
       {path: '/input', parent: 'examples', component: 'input'},
-      {path: '/iframe', parent: 'examples', component: 'iframe'},
-      {path: '/blog/home', parent: 'blog', component: 'home'}
+      {path: '/iframe', parent: 'examples', component: 'iframe'}
+    ];
+    const blogMenu = [
+      {path: 'home', parent: 'blog', component: 'home'}
     ];
     return (
       <HashRouter>
-        <App menus={[]}>
-          <Switch>
-            {menus.map(this.route)}
-          </Switch>
-        </App>
+        <Switch>
+          <Route path='/examples' component={() => (<App>{menus.map(this.route)}</App>)} />
+          <Route path='/blog' component={() => (<BlogApp>{blogMenu.map(this.route)}</BlogApp>)} />
+        </Switch>
       </HashRouter>
     )
   }
