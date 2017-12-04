@@ -6,6 +6,8 @@ import Table from './table';
 import Checkbox from './checkbox';
 import Radio from './radio';
 import Input from './input';
+import Frame from './iframe';
+import Event from './event';
 
 export {
   Layout,
@@ -15,5 +17,7 @@ export {
   Table,
   Checkbox,
   Radio,
-  Input
+  Input,
+  Frame,
+  Event
 }

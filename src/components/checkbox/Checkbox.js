@@ -46,7 +46,6 @@ class Checkbox extends React.Component {
                  className={`${prefixCls}-input`}
                  checked={!!checked}
                  onChange={this.h_change}
-                 {...other}
           />
           <span className={`${prefixCls}-inner`}/>
         </span>

@@ -1,12 +1,18 @@
 import React from 'react';
 import {HashRouter, Route, Switch} from 'react-router-dom';
 import Bundle from './Bundle';
-import App from 'containers/app';
+import App from 'examples@containers/app';
 
 class Routes extends React.Component {
-  r_component = (props, component) => {
+  r_component = (props, parent, component) => {
     return (
-      <Bundle load={() => import(`containers/${component}/index.js`)}>
+      <Bundle load={() => {
+        if (parent === 'examples') {
+          return import(`examples@containers/${component}/index.js`);
+        } else if (parent === 'blog') {
+          return import(`blog@containers/${component}/index.js`);
+        }
+      }}>
         {(COM) => <COM {...props} />}
       </Bundle>
     )
@@ -16,21 +22,23 @@ class Routes extends React.Component {
       <Route key={menu.path}
              path={menu.path}
              exact
-             component={(props) => this.r_component(props, menu.component)}
+             component={(props) => this.r_component(props, menu.parent, menu.component)}
       />)
   };
 
   render() {
     const menus = [
-      {path: '/', component: 'home'},
-      {path: '/button', component: 'button'},
-      {path: '/menu', component: 'menu'},
-      {path: '/layout', component: 'layout'},
-      {path: '/table', component: 'table'},
-      {path: '/icon', component: 'icon'},
-      {path: '/checkbox', component: 'checkbox'},
-      {path: '/radio', component: 'radio'},
-      {path: '/input', component: 'input'}
+      {path: '/', parent: 'examples', component: 'home'},
+      {path: '/button', parent: 'examples', component: 'button'},
+      {path: '/menu', parent: 'examples', component: 'menu'},
+      {path: '/layout', parent: 'examples', component: 'layout'},
+      {path: '/table', parent: 'examples', component: 'table'},
+      {path: '/icon', parent: 'examples', component: 'icon'},
+      {path: '/checkbox', parent: 'examples', component: 'checkbox'},
+      {path: '/radio', parent: 'examples', component: 'radio'},
+      {path: '/input', parent: 'examples', component: 'input'},
+      {path: '/iframe', parent: 'examples', component: 'iframe'},
+      {path: '/blog/home', parent: 'blog', component: 'home'}
     ];
     return (
       <HashRouter>

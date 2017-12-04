@@ -21,6 +21,7 @@ class AppMenu extends React.Component {
         </SubMenu>
         <SubMenu title='布局组件'>
           <Item key='9'><Link to='/layout' replace>LAYOUT</Link></Item>
+          <Item key='10'><Link to='/iframe' replace>IFRAME</Link></Item>
         </SubMenu>
       </Menu>
     )

@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Layout} from 'components';
 import AppMenu from './AppMenu';
 import AppHeader from './AppHeader';
+import AppFooter from './AppFooter';
 import './App.less';
 
 class App extends React.Component {
@@ -10,25 +10,23 @@ class App extends React.Component {
     const {children} = this.props;
     return (
       <Layout className='ym-app'>
-        <AppHeader/>
+        <AppHeader />
         <Layout>
           <Layout.Sider>
             <AppMenu />
           </Layout.Sider>
-          <Layout.Content className='ym-app-content'>
-            {children}
+          <Layout.Content>
+            <Layout>
+              <Layout.Content className='ym-app-content'>
+                {children}
+              </Layout.Content>
+              <AppFooter />
+            </Layout>
           </Layout.Content>
         </Layout>
-        <Layout.Footer>
-          footer
-        </Layout.Footer>
       </Layout>
     )
   }
 }
-
-App.propTypes = {
-  children: PropTypes.any
-};
 
 export default App;

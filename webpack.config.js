@@ -12,6 +12,8 @@ const CleanPlugin = require('clean-webpack-plugin');
 
 const ENV = process.env.NODE_ENV;
 const client = 'src/client';
+const examples = 'src/client/examples';
+const blog = 'src/client/blog';
 const config = {
   entry: {
     main: path.resolve(__dirname, client, 'app.js'),
@@ -25,10 +27,9 @@ const config = {
   resolve: {
     alias: {
       'components': path.resolve(__dirname, 'src/components'),
-      'util': path.resolve(__dirname, client, 'util'),
       'theme': path.resolve(__dirname, client, 'theme'),
-      'containers': path.resolve(__dirname, client, 'containers'),
-      'constants': path.resolve(__dirname, client, 'constants')
+      'examples@containers': path.resolve(__dirname, examples),
+      'blog@containers': path.resolve(__dirname, blog)
     }
   },
   module: {
@@ -49,7 +50,9 @@ const config = {
         })
       }, {
         test: /\.(png|jpe?g|gif)$/,
-        include: path.resolve(__dirname, './src/client'),
+        include: [
+          path.resolve(__dirname, './src/client')
+        ],
         use: 'url-loader?limit=100&name=img/[name].[hash:8].[ext]'
       }, {
         test: /\.(ttf|svg|eot|woff)$/,
@@ -90,7 +93,7 @@ const config = {
       loaders: ['style-loader', 'css-loader', 'less-loader', 'postcss-loader']
     }),
     new HtmlWebpackPlugin({
-      title: 'YM',
+      title: 'YM Component',
       favicon: './src/server/static/images/favicon.ico',
       template: path.join(__dirname, 'src/server/template/index.html'),
       chunks: ['manifest', 'vendor', 'common', 'main'],
