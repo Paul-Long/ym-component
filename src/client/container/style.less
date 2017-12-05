@@ -1,0 +1,35 @@
+@ym-container: ~'ym-container';
+
+.@{ym-container} {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  &-item {
+    width: 150px;
+    height: 150px;
+    line-height: 1;
+    border: 1px solid #d9d9d9;
+    font-size: 28px;
+    margin: 10px;
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      line-height: 150px;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+  &-examples {
+    background: #00a2ae;
+    color: white;
+  }
+  &-blog {
+    background: #7265e6;
+    color: white;
+  }
+}

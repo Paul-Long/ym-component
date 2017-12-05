@@ -9,7 +9,6 @@ import './App.less';
 
 class App extends RouteBase {
   render() {
-    console.log(this.route(menus));
     return (
       <Layout className='ym-app'>
         <AppHeader />

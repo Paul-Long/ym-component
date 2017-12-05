@@ -25,8 +25,13 @@ const config = {
     publicPath: '/'
   },
   resolve: {
+    modules: [
+      path.join(__dirname, 'src'),
+      'node_modules'
+    ],
     alias: {
       'components': path.resolve(__dirname, 'src/components'),
+      'client': path.resolve(__dirname, client),
       'routes': path.resolve(__dirname, client, 'routes'),
       'examples@containers': path.resolve(__dirname, examples),
       'blog@containers': path.resolve(__dirname, blog)

@@ -1,18 +1,16 @@
 import React from 'react';
 import {Layout} from 'components';
+import RouteBase from 'routes/RouteBase';
+import menus from './menus';
 import './blog.less';
 
-class BlogApp extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log(props);
-  }
+class BlogApp extends RouteBase {
   render() {
     return (
       <Layout className={this.props.prefixCls}>
         <Layout.Header>Blog</Layout.Header>
         <Layout.Content>
-          {this.props.children}
+          {this.route(menus)}
         </Layout.Content>
       </Layout>
     )
@@ -21,5 +19,6 @@ class BlogApp extends React.Component {
 export default BlogApp;
 
 BlogApp.defaultProps = {
-  prefixCls: 'ym-blog-app'
+  prefixCls: 'ym-blog-app',
+  parent: 'blog'
 };
