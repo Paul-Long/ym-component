@@ -7,9 +7,9 @@ class RouteBase extends React.Component {
     return (
       <Bundle load={() => {
         if (parent === 'examples') {
-          return import(`examples@containers/${component}/index.js`);
+          return import(`@examples/${component}/index.js`);
         } else if (parent === 'blog') {
-          return import(`blog@containers/${component}/index.js`);
+          return import(`@blog/${component}/index.js`);
         }
       }}>
         {(COM) => <COM {...props} />}

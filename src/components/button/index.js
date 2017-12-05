@@ -5,7 +5,7 @@ import './style';
 
 class Button extends React.Component {
   render() {
-    const {children, className, style = {}, type, size} = this.props;
+    const {children, className, style = {}, type, size, onClick} = this.props;
     let btnCls = classNames([
       'ym-btn',
       `ym-btn-${type}`,
@@ -16,6 +16,7 @@ class Button extends React.Component {
     return (
       <button className={btnCls}
               style={btnStyle}
+              onClick={onClick}
       >{children}</button>
     )
   }

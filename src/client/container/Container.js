@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import RouteBase from 'routes/RouteBase';
-import {Link} from 'react-router-dom';
+import AppItem from './AppItem';
 import './style.less';
 
 class Container extends RouteBase {
@@ -10,12 +10,9 @@ class Container extends RouteBase {
     const cls = classNames([prefixCls, 'flex-row']);
     return (
       <div className={cls}>
-        <div className={`${prefixCls}-item ${prefixCls}-examples`}>
-          <Link to='/examples' replace>组件实例</Link>
-        </div>
-        <div className={`${prefixCls}-item ${prefixCls}-blog`}>
-          <Link to='/blog' replace>博客</Link>
-        </div>
+        <AppItem path='/examples' prefixCls={prefixCls} parent='examples' title='组件实例' />
+        <AppItem path='/blog' prefixCls={prefixCls} parent='blog' title='博客' />
+        <AppItem path='/bookmark' prefixCls={prefixCls} parent='bookmark' title='书签' />
       </div>
     )
   }

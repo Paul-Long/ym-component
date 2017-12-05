@@ -12,8 +12,6 @@ const CleanPlugin = require('clean-webpack-plugin');
 
 const ENV = process.env.NODE_ENV;
 const client = 'src/client';
-const examples = 'src/client/examples';
-const blog = 'src/client/blog';
 const config = {
   entry: {
     main: path.resolve(__dirname, client, 'app.js'),
@@ -34,8 +32,9 @@ const config = {
       'client': path.resolve(__dirname, client),
       'routes': path.resolve(__dirname, client, 'routes'),
       'app@components': path.resolve(__dirname, client, 'components'),
-      'examples@containers': path.resolve(__dirname, examples),
-      'blog@containers': path.resolve(__dirname, blog)
+      '@examples': path.resolve(__dirname, client, 'examples'),
+      '@blog': path.resolve(__dirname, client, 'blog'),
+      '@bookmark': path.resolve(__dirname, client, 'bookmark')
     }
   },
   module: {
