@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 class Item extends React.Component {
   g_style = () => {
-    const {style, level} = this.props;
+    const {style, level, mode} = this.props;
     let cusStyle = {};
+    if (mode !== 'vertical') return cusStyle;
     cusStyle.paddingLeft = `${level * 24}px`;
     return Object.assign({}, style, cusStyle);
   };
@@ -17,8 +17,10 @@ class Item extends React.Component {
   };
 
   render() {
-    const {className, children} = this.props;
-    let liCls = classNames(['ym-menu-item', className || '']);
+    const {className, children, prefixCls, active} = this.props;
+    let liCls = classNames(prefixCls, className, {
+      [`${prefixCls}-active`]: active
+    });
     return (
       <li className={liCls} style={this.g_style()} onClick={this.h_click}>
         {children}
@@ -27,10 +29,9 @@ class Item extends React.Component {
   }
 }
 
-Item.propTypes = {
-  children: PropTypes.any,
-  className: PropTypes.string,
-  style: PropTypes.object,
-  level: PropTypes.number
-};
 export default Item;
+
+Item.defaultProps = {
+  prefixCls: 'ym-menu-item',
+  active: false
+};

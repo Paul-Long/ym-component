@@ -1,11 +1,11 @@
 import React from 'react';
-import {Menu} from 'components';
 import {Link} from 'react-router-dom';
+import {Menu} from 'components';
 import menus from './menus';
 
 const {Item, SubMenu} = Menu;
 
-class AppMenu extends React.Component {
+class BlogMenu extends React.Component {
   r_item = ({path, title}) => {
     return (<Item key={path}><Link to={`/${this.props.parent}${path}`} replace>{title}</Link></Item>)
   };
@@ -22,14 +22,13 @@ class AppMenu extends React.Component {
   };
   render() {
     return (
-      <Menu theme='dark' className='ym-demo-app-menu'>
+      <Menu theme='light' mode='horizontal' className='ym-blog-menu'>
         {this.r_menu()}
       </Menu>
     )
   }
 }
-
-export default AppMenu;
-AppMenu.defaultProps = {
-  parent: 'examples'
+export default BlogMenu;
+BlogMenu.defaultProps = {
+  parent: 'blog'
 };

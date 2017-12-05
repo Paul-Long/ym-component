@@ -1,6 +1,7 @@
 @import "../../style/default";
 @import "../../style/flex";
 @import "mixin";
+
 @ym-menu: ~'ym-menu';
 .@{ym-menu} {
   outline: none;
@@ -9,7 +10,7 @@
   z-index: 99999;
   box-shadow: @box-shadow-base;
   border-radius: 2px;
-  line-height: @menu-item-height;
+  line-height: 1.5;
   margin: 0;
   box-sizing: border-box;
   border-right: 1px solid @black;
@@ -18,12 +19,14 @@
   }
   &-item {
     user-select: none;
+    display: block;
+    vertical-align: middle;
     a {
       text-decoration: none;
       width: 100%;
-      height: @menu-item-height;
       display: block;
       color: inherit;
+      vertical-align: middle;
     }
   }
   &-submenu {
@@ -41,9 +44,29 @@
     cursor: pointer;
   }
   &-light {
-    .menu-item-color(@menu-color, @menu-bg-color, @menu-bg-color, @white);
+    .menu-item-color(@menu-color, @menu-bg-color, @menu-bg-color, @white, @menu-active-color);
   }
   &-dark {
-    .menu-item-color(@menu-color-dark, @menu-bg-color-dark, @black, @menu-color);
+    .menu-item-color(@menu-color-dark, @menu-bg-color-dark, @black, @menu-color, @menu-active-color);
+  }
+}
+
+.@{ym-menu}-vertical {
+  .@{ym-menu}-item, .@{ym-menu}-submenu-title {
+    height: @menu-item-height;
+    line-height: @menu-item-height;
+  }
+}
+
+.@{ym-menu}-horizontal {
+  border-right: none;
+  box-shadow: none;
+  .@{ym-menu}-item {
+    float: left;
+    padding-left: 30px;
+    padding-right: 30px;
+    height: 100%;
+    display: flex;
+    align-items: center;
   }
 }

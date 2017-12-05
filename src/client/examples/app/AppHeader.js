@@ -1,12 +1,13 @@
 import React from 'react';
 import {Layout} from 'components';
 import {Link} from 'react-router-dom';
+import Logo from 'app@components/logo';
 
 class AppHeader extends React.Component {
   render() {
     return (
       <Layout.Header className='ym-app-header'>
-        <div className='ym-app-logo'><Link to='/' replace>YM</Link></div>
+        <Logo />
       </Layout.Header>
     )
   }

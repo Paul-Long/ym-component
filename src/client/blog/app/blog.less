@@ -1,7 +1,19 @@
-@ym-blog: ~'ym-blog-app';
+@ym-blog: ~'ym-blog';
 
 .@{ym-blog} {
-  .ym-layout-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  &-header {
     background: white;
+    display: flex;
+    flex-direction: row;
+    color: black;
+    box-shadow: 0 2px 4px #f0f1f2;
+    position: relative;
+    align-content: flex-end;
   }
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {renderChild} from './MenuMixin';
 import Icon from '../icon';
@@ -8,20 +7,28 @@ class SubMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeKey: null,
+      activeKey: props.activeKey,
       opened: true
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.activeKey !== this.props.activeKey) {
+      this.setState({activeKey: nextProps.activeKey});
+    }
+  }
+
   g_style = () => {
-    const {style, level} = this.props;
+    const {style, level, mode} = this.props;
     let cusStyle = {};
+    if (mode !== 'vertical') return cusStyle;
     cusStyle.paddingLeft = `${level * 12}px`;
     return Object.assign({}, style, cusStyle);
   };
 
   h_itemClick = (eventKey) => {
-    this.setState({activeKey: eventKey});
+    const {onClick} = this.props;
+    (typeof onClick === 'function') && onClick(eventKey);
   };
 
   r_title = () => {
@@ -40,14 +47,17 @@ class SubMenu extends React.Component {
 
   r_children = () => {
     const {children, level} = this.props;
-    return React.Children.map(children, (ele, i, subIndex) => renderChild.call(this, ele, i, subIndex, {level: level + 1}))
+    return React.Children.map(children, (ele, i, subIndex) => {
+      return renderChild.call(this, ele, i, subIndex, {level: level + 1});
+    })
   };
 
   render() {
-    const {className} = this.props;
+    const {className, prefixCls} = this.props;
     const {opened} = this.state;
-    const prefixCls = 'ym-menu-submenu';
-    let liCls = classNames([prefixCls, className || '', opened ? `${prefixCls}-opened` : '']);
+    let liCls = classNames(prefixCls, className || '', {
+      [`${prefixCls}-opened`]: opened
+    });
     return (
       <li className={liCls}>
         {this.r_title()}
@@ -59,11 +69,8 @@ class SubMenu extends React.Component {
   }
 }
 
-SubMenu.propTypes = {
-  className: PropTypes.string,
-  children: PropTypes.any,
-  title: PropTypes.any,
-  level: PropTypes.number,
-  style: PropTypes.object
-};
 export default SubMenu;
+
+SubMenu.defaultProps = {
+  prefixCls: 'ym-menu-submenu'
+};

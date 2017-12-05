@@ -1,24 +1,40 @@
-.menu-item-color(@color, @background, @item-background, @title-bg-color) {
+.menu-item-color(@color, @background, @item-background, @title-bg-color, @active-color) {
   color: @color;
   background: @background;
-  .ym-menu-item {
-    background: @item-background;
-    &:hover, &:focus {
-      color: ~`colorPalette("@{color}", 5)`;
-      background: ~`colorPalette("@{item-background}", 5)`;
+  &.ym-menu-vertical {
+    .ym-menu-item {
+      background: @item-background;
+      &:hover, &:focus {
+        color: ~`colorPalette("@{color}", 5)`;
+        background: ~`colorPalette("@{active-color}", 5)`;
+      }
+      &:active, &.active, &-active {
+        color: ~`colorPalette("@{color}", 7)`;
+        background: ~`colorPalette("@{active-color}", 7)`;
+      }
     }
-    &:active, &.active {
-      color: ~`colorPalette("@{color}", 7)`;
-      background: ~`colorPalette("@{item-background}", 7)`;
+    .ym-menu-submenu-title {
+      background: @title-bg-color;
+      &:hover, &:focus {
+        background: ~`colorPalette("@{title-bg-color}", 5)`;
+      }
+      &:active, &.active {
+        background: ~`colorPalette("@{title-bg-color}", 7)`;
+      }
     }
   }
-  .ym-menu-submenu-title {
-    background: @title-bg-color;
-    &:hover, &:focus {
-      background: ~`colorPalette("@{title-bg-color}", 5)`;
-    }
-    &:active, &.active {
-      background: ~`colorPalette("@{title-bg-color}", 7)`;
+  &.ym-menu-horizontal {
+    .ym-menu-item {
+      background: @item-background;
+      border: 0;
+      &:hover, &:focus {
+        color: ~`colorPalette("@{color}", 5)`;
+        border-bottom: 2px solid ~`colorPalette("@{active-color}", 4)`;
+      }
+      &:active, &.active, &-active {
+        color: ~`colorPalette("@{color}", 7)`;
+        border-bottom: 2px solid ~`colorPalette("@{active-color}", 5)`;
+      }
     }
   }
 }

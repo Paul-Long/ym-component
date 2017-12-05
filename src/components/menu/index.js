@@ -30,7 +30,9 @@ class Menu extends React.Component {
 
   r_children = () => {
     const {children} = this.props;
-    return React.Children.map(children, (ele, i, subIndex) => renderChild.call(this, ele, i, subIndex));
+    return React.Children.map(children, (ele, i, subIndex) => {
+      return renderChild.call(this, ele, i, subIndex);
+    });
   };
 
   render() {

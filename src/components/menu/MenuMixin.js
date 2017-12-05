@@ -11,6 +11,7 @@ export function renderChild(child, i, subIndex, extraProps) {
     index: i,
     eventKey: key,
     active: isActive,
+    activeKey: state.activeKey,
     onClick: this.h_itemClick,
     ...extraProps
   };
@@ -20,8 +21,4 @@ export function renderChild(child, i, subIndex, extraProps) {
 export function getKeyFromChildrenIndex(child, menuEventKey, index) {
   const prefix = menuEventKey || '';
   return child.key || `${prefix}item_${index}`;
-}
-
-export default {
-  renderChild
 }
