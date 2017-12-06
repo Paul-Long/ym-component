@@ -17,6 +17,7 @@ class Container extends RouteBase {
         <AppItem path='/examples' prefixCls={prefixCls} parent='examples' title='组件实例' />
         <AppItem path='/blog' prefixCls={prefixCls} parent='blog' title='博客' />
         <AppItem path='/bookmark' prefixCls={prefixCls} parent='bookmark' title='书签' />
+        <AppItem path='/admin' prefixCls={prefixCls} parent='admin' title='后台管理'/>
       </div>
     )
   }

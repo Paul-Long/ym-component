@@ -4,6 +4,7 @@ import Container from 'client/container/Container';
 import App from '@examples/app';
 import BlogApp from '@blog/app';
 import Bookmark from '@bookmark/app';
+import Admin from '@admin/app';
 
 export default (() => (
   <HashRouter>
@@ -12,6 +13,7 @@ export default (() => (
       <Route path='/examples' component={App} />
       <Route path='/blog' component={BlogApp} />
       <Route path='/bookmark' component={Bookmark} />
+      <Route path='/admin' component={Admin}/>
     </Switch>
   </HashRouter>
 ));

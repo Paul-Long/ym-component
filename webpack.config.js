@@ -35,7 +35,8 @@ const config = {
       'app@utils': path.resolve(__dirname, client, 'utils'),
       '@examples': path.resolve(__dirname, client, 'examples'),
       '@blog': path.resolve(__dirname, client, 'blog'),
-      '@bookmark': path.resolve(__dirname, client, 'bookmark')
+      '@bookmark': path.resolve(__dirname, client, 'bookmark'),
+      '@admin': path.resolve(__dirname, client, 'admin')
     }
   },
   module: {
