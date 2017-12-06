@@ -32,6 +32,7 @@ const config = {
       'client': path.resolve(__dirname, client),
       'routes': path.resolve(__dirname, client, 'routes'),
       'app@components': path.resolve(__dirname, client, 'components'),
+      'app@utils': path.resolve(__dirname, client, 'utils'),
       '@examples': path.resolve(__dirname, client, 'examples'),
       '@blog': path.resolve(__dirname, client, 'blog'),
       '@bookmark': path.resolve(__dirname, client, 'bookmark')

@@ -2,9 +2,13 @@ import React from 'react';
 import classNames from 'classnames';
 import RouteBase from 'routes/RouteBase';
 import AppItem from './AppItem';
+import {fetch} from 'app@utils/fetch';
 import './style.less';
 
 class Container extends RouteBase {
+  componentDidMount() {
+    fetch('/user/list', {method: 'GET'});
+  }
   render() {
     const {prefixCls = ''} = this.props;
     const cls = classNames([prefixCls, 'flex-row']);

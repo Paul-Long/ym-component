@@ -6,10 +6,11 @@ import session from 'express-session';
 import connectMongo from 'connect-mongo';
 import cookieParser from 'cookie-parser';
 import db from './mongodb/db';
+import route from './routes';
 
 const app = express();
-
 const MongoStore = connectMongo(session);
+const ENV = process.env.NODE_ENV;
 
 app.use(cookieParser(config.session.secret, config.cookie));
 app.use(session({
@@ -18,8 +19,6 @@ app.use(session({
   cookie: {maxAge: 365 * 24 * 60 * 60 * 1000},
   store: new MongoStore({mongooseConnection: db})
 }));
-
-const ENV = process.env.NODE_ENV;
 
 if (ENV === 'develpoment') {
   const webpackDevMiddleWare = require('webpack-dev-middleware');
@@ -31,7 +30,7 @@ if (ENV === 'develpoment') {
   }));
   app.use(webpackHotMiddleWare(compiler));
 }
-
+route(app);
 app.use(express.static(webpackConfig.output.path));
 const server = app.listen(config.port, function () {
   const port = server.address().port;
