@@ -1,11 +1,29 @@
-const express = require('express');
+import express from 'express';
+import webpack from 'webpack';
+import webpackConfig from '../../webpack.config';
+import config from './config';
+import session from 'express-session';
+import connectMongo from 'connect-mongo';
+import cookieParser from 'cookie-parser';
+import db from './mongodb/db';
+
 const app = express();
-const webpack = require('webpack');
-const webpackConfig = require('../../webpack.config');
-const webpackDevMiddleWare = require('webpack-dev-middleware');
-const webpackHotMiddleWare = require('webpack-hot-middleware');
+
+const MongoStore = connectMongo(session);
+
+app.use(cookieParser(config.session.secret, config.cookie));
+app.use(session({
+  name: config.session.name,
+  secret: config.session.secret,
+  cookie: {maxAge: 365 * 24 * 60 * 60 * 1000},
+  store: new MongoStore({mongooseConnection: db})
+}));
+
 const ENV = process.env.NODE_ENV;
+
 if (ENV === 'develpoment') {
+  const webpackDevMiddleWare = require('webpack-dev-middleware');
+  const webpackHotMiddleWare = require('webpack-hot-middleware');
   const compiler = webpack(webpackConfig);
   app.use(webpackDevMiddleWare(compiler, {
     noInfo: true,
@@ -15,10 +33,7 @@ if (ENV === 'develpoment') {
 }
 
 app.use(express.static(webpackConfig.output.path));
-app.get('*', (req, res) => {
-  res.redirect('/');
-});
-const server = app.listen(3389, function () {
+const server = app.listen(config.port, function () {
   const port = server.address().port;
   console.log("应用实例，访问地址为 http://localhost:%s", port)
 });
