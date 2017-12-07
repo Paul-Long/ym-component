@@ -2,22 +2,9 @@ import React from 'react';
 import classNames from 'classnames';
 import AppItem from './AppItem';
 import RouteBase from 'routes/RouteBase';
-import {fetch} from 'app@utils/fetch';
 import './style.less';
 
 class YmApp extends RouteBase {
-  componentDidMount() {
-    fetch('/api/user/list', {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).then(function (response) {
-      console.log(response);
-    });
-  }
-
   render() {
     const {prefixCls = ''} = this.props;
     const cls = classNames([prefixCls, 'flex-row']);

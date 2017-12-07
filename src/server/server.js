@@ -37,10 +37,11 @@ app.use(express.static(webpackConfig.output.path));
 app.use(function (req, res, next) {
   const url = req.originalUrl;
   if (url !== '/login' && !req.session.user) {
-    return res.redirect('/login');
+    return res.redirect('/');
   }
   res.send(render(req, res, next));
 });
+
 const server = app.listen(config.port, function () {
   const port = server.address().port;
   console.log("应用实例，访问地址为 http://localhost:%s", port)

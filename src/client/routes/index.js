@@ -10,12 +10,12 @@ import Admin from '@admin/app';
 export default (() => (
   <BrowserRouter>
     <Switch>
-      <Route path='/' exact component={YmApp} />
+      <Route path='/' exact component={Login} />
+      <Route path='/ym' exact component={YmApp} />
       <Route path='/examples' component={Examples} />
       <Route path='/blog' component={Blog} />
       <Route path='/bookmark' component={Bookmark} />
       <Route path='/admin' component={Admin}/>
-      <Route path='/login' exact component={Login} />
     </Switch>
   </BrowserRouter>
 ));

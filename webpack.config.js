@@ -12,6 +12,7 @@ const CleanPlugin = require('clean-webpack-plugin');
 
 const ENV = process.env.NODE_ENV;
 const client = 'src/client';
+const server = 'src/server';
 const config = {
   entry: {
     main: path.resolve(__dirname, client, 'app.js'),
