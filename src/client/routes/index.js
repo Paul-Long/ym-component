@@ -1,19 +1,21 @@
 import React from 'react';
-import {HashRouter, Route, Switch} from 'react-router-dom';
-import Container from 'client/container/Container';
-import App from '@examples/app';
-import BlogApp from '@blog/app';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import YmApp from '@app/app';
+import Login from '@app/login';
+import Examples from '@examples/app';
+import Blog from '@blog/app';
 import Bookmark from '@bookmark/app';
 import Admin from '@admin/app';
 
 export default (() => (
-  <HashRouter>
+  <BrowserRouter>
     <Switch>
-      <Route path='/' exact component={Container} />
-      <Route path='/examples' component={App} />
-      <Route path='/blog' component={BlogApp} />
+      <Route path='/' exact component={YmApp} />
+      <Route path='/examples' component={Examples} />
+      <Route path='/blog' component={Blog} />
       <Route path='/bookmark' component={Bookmark} />
       <Route path='/admin' component={Admin}/>
+      <Route path='/login' exact component={Login} />
     </Switch>
-  </HashRouter>
+  </BrowserRouter>
 ));

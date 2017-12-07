@@ -5,12 +5,13 @@ import AppHeader from './AppHeader';
 import AppFooter from './AppFooter';
 import RouteBase from 'routes/RouteBase';
 import menus from './menus';
-import './App.less';
+import './style.less';
 
-class App extends RouteBase {
+class ExamplesApp extends RouteBase {
   render() {
+    const {prefixCls} = this.props;
     return (
-      <Layout className='ym-app'>
+      <Layout className={prefixCls}>
         <AppHeader />
         <Layout>
           <Layout.Sider>
@@ -18,7 +19,7 @@ class App extends RouteBase {
           </Layout.Sider>
           <Layout.Content>
             <Layout>
-              <Layout.Content className='ym-app-content'>
+              <Layout.Content className={`${prefixCls}-content`}>
                 {this.route(menus)}
               </Layout.Content>
               <AppFooter />
@@ -30,8 +31,9 @@ class App extends RouteBase {
   }
 }
 
-export default App;
+export default ExamplesApp;
 
-App.defaultProps = {
-  parent: 'examples'
+ExamplesApp.defaultProps = {
+  parent: 'examples',
+  prefixCls: 'ym-examples'
 };

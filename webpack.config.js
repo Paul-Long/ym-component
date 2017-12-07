@@ -33,6 +33,7 @@ const config = {
       'routes': path.resolve(__dirname, client, 'routes'),
       'app@components': path.resolve(__dirname, client, 'components'),
       'app@utils': path.resolve(__dirname, client, 'utils'),
+      '@app': path.resolve(__dirname, client, 'container'),
       '@examples': path.resolve(__dirname, client, 'examples'),
       '@blog': path.resolve(__dirname, client, 'blog'),
       '@bookmark': path.resolve(__dirname, client, 'bookmark'),
@@ -100,7 +101,7 @@ const config = {
       loaders: ['style-loader', 'css-loader', 'less-loader', 'postcss-loader']
     }),
     new HtmlWebpackPlugin({
-      title: 'YM Component',
+      title: 'YM APP',
       favicon: './src/server/static/images/favicon.ico',
       template: path.join(__dirname, 'src/server/template/index.html'),
       chunks: ['manifest', 'vendor', 'common', 'main'],

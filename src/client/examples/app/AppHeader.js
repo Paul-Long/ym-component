@@ -6,7 +6,7 @@ import Logo from 'app@components/logo';
 class AppHeader extends React.Component {
   render() {
     return (
-      <Layout.Header className='ym-app-header'>
+      <Layout.Header className='ym-examples-header'>
         <Logo />
       </Layout.Header>
     )
