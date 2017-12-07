@@ -27,6 +27,8 @@
     }
   },
   "dependencies": {
+    "antd": "^3.0.0",
+    "babel-plugin-import": "^1.6.2",
     "connect-mongo": "^2.0.0",
     "cookie-parser": "^1.4.3",
     "es6-promise": "^4.1.1",

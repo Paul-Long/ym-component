@@ -76,7 +76,7 @@ const config = {
     new WebpackMd5Hash(),
     new CaseSensitivePathsPlugin(),
     new CleanPlugin([path.resolve(__dirname, 'dist')], {verbose: true}),
-    new ExtractTextPlugin('[name].[contenthash:8].css', {allChunks: true}),
+    new ExtractTextPlugin({filename: '[name].[contenthash:8].css', allChunks: true}),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.LimitChunkCountPlugin({maxChunks: 10}),
     new webpack.optimize.MinChunkSizePlugin({minChunkSize: 10240}),

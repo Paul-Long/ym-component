@@ -7,7 +7,7 @@ import './style.less';
 
 class YmApp extends RouteBase {
   componentDidMount() {
-    fetch('/birds/about', {
+    fetch('/api/user/list', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
