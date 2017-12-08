@@ -21,10 +21,7 @@ class UserList extends React.Component {
     post('/api/user/list', {})
       .then(result => {
         Result.parse(result)
-          .success(res => {
-            console.log(res.content);
-            self.setState({dataSource: res.content});
-          })
+          .success(res => self.setState({dataSource: res.content}))
       });
   };
 
@@ -34,12 +31,14 @@ class UserList extends React.Component {
         title: '用户名',
         dataIndex: 'userName',
         key: 'userName',
+        width: '30%',
         render: (text, record) => <EditTableCell value={text} />
       },
       {
         title: '创建时间',
         dataIndex: 'createTime',
-        key: 'createTime'
+        key: 'createTime',
+        width: '30%'
       },
       {
         title: '操作',

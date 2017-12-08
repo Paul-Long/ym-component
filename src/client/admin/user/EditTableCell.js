@@ -25,7 +25,7 @@ class EditTableCell extends React.Component {
       <div className='flex-row'>
         {
           editable ?
-            <div className='flex-between' style={{width: '100%', flexAlign: 'center'}}>
+            <div className='flex-between' style={{width: '100%'}}>
               <Input
                 value={value}
                 onChange={this.handleChange}
@@ -33,16 +33,14 @@ class EditTableCell extends React.Component {
               />
               <Icon
                 type='check'
-                className='editable-cell-icon-check'
                 onClick={this.check}
               />
             </div>
             :
-            <div className='flex-between' style={{width: '100%', flexAlign: 'center'}}>
+            <div className='flex-between' style={{width: '100%'}}>
               <span>{value || ' '}</span>
               <Icon
                 type='edit'
-                className='editable-cell-icon'
                 onClick={this.edit}
               />
             </div>
