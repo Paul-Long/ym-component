@@ -65,7 +65,11 @@ class UserList extends React.Component {
           <h2>header</h2>
         </Header>
         <Content style={{paddingLeft: '3px'}}>
-          <Table rowKey='_id' dataSource={this.state.dataSource} columns={this.g_columns()} />
+          <Table rowKey='_id'
+                 dataSource={this.state.dataSource}
+                 columns={this.g_columns()}
+                 bordered
+          />
         </Content>
       </Layout>
     )

@@ -42,7 +42,7 @@ class UserController {
   async list(req, res, next) {
     const form = new formidable.IncomingForm();
     form.parse(req, async (err, fields) => {
-      const users = await User.find();
+      const users = await User.find({});
       res.send(Result.success(users));
     });
   }

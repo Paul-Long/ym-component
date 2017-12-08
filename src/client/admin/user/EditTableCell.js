@@ -1,5 +1,5 @@
 import React from 'react';
-import {Input, Icon} from 'antd';
+import {Icon, Input} from 'antd';
 
 class EditTableCell extends React.Component {
   state = {
@@ -22,27 +22,27 @@ class EditTableCell extends React.Component {
   render() {
     const { value, editable } = this.state;
     return (
-      <div className="editable-cell">
+      <div className='flex-row'>
         {
           editable ?
-            <div className="editable-cell-input-wrapper">
+            <div className='flex-between' style={{width: '100%', flexAlign: 'center'}}>
               <Input
                 value={value}
                 onChange={this.handleChange}
                 onPressEnter={this.check}
               />
               <Icon
-                type="check"
-                className="editable-cell-icon-check"
+                type='check'
+                className='editable-cell-icon-check'
                 onClick={this.check}
               />
             </div>
             :
-            <div className="editable-cell-text-wrapper">
-              {value || ' '}
+            <div className='flex-between' style={{width: '100%', flexAlign: 'center'}}>
+              <span>{value || ' '}</span>
               <Icon
-                type="edit"
-                className="editable-cell-icon"
+                type='edit'
+                className='editable-cell-icon'
                 onClick={this.edit}
               />
             </div>
