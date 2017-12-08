@@ -2,7 +2,8 @@ import React from 'react';
 import classNames from 'classnames';
 import {Button, Form, Icon, Input, message} from 'antd';
 import Immutable from 'immutable';
-import {fetch} from 'app@utils/fetch';
+import {post} from 'app@utils/fetch';
+import Result from 'app@utils/Result';
 import './style.less';
 
 const FormItem = Form.Item;
@@ -12,34 +13,26 @@ class Login extends React.Component {
     super(props);
     this.state = {
       user: Immutable.fromJS({})
-    }
+    };
   }
-
   h_submit = () => {
     const {user} = this.state;
-    if (!user.get('username')) {
+    const history = this.props.history;
+    if (!user.get('userName')) {
       return message.error('请填写用户名');
     }
     if (!user.get('password')) {
       return message.error('请输入密码');
     }
-    console.log(this.props);
-    const history = this.props.history;
-    fetch('/api/user/login', {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(this.state.user.toJS())
-    }).then(function (response) {
-      const {status, message: mes} = response;
-      if (status === 200 && mes) {
-        history.push('/ym');
-        message.success(mes);
-      }
-      if (status === 400 && mes) message.error(mes);
-    });
+    post('/api/user/login', this.state.user.toJS())
+      .then(result => {
+        Result.parse(result)
+          .success((result) => {
+            (result.message) && message.success(result.message);
+            history.push('/ym');
+          })
+          .error();
+      });
   };
   h_change = (user) => {
     user = this.state.user.merge(Immutable.fromJS(user));
@@ -56,8 +49,8 @@ class Login extends React.Component {
           <FormItem>
             <Input prefix={<Icon type='user' style={{color: 'rgba(0,0,0,.25)'}} />}
                    size='large'
-                   value={user.get('username')}
-                   onChange={e => this.h_change({username: e.target.value})}
+                   value={user.get('userName')}
+                   onChange={e => this.h_change({userName: e.target.value})}
             />
           </FormItem>
           <FormItem>

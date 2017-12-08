@@ -14,6 +14,7 @@ const ENV = process.env.NODE_ENV;
 const client = 'src/client';
 const server = 'src/server';
 const config = {
+  cache: true,
   entry: {
     main: path.resolve(__dirname, client, 'app.js'),
     vendor: ['react', 'react-dom', 'react-router-dom']
@@ -47,7 +48,8 @@ const config = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         include: [
-          path.resolve(__dirname, './src/client'),
+          path.resolve(__dirname, client),
+          path.resolve(__dirname, server),
           path.resolve(__dirname, './src/components')
         ],
         use: 'happypack/loader?id=js'
@@ -93,11 +95,13 @@ const config = {
     }),
     new HappyPack({
       id: 'js',
+      cache: true,
       threadPool: happyThreadPool,
       loaders: ['babel-loader']
     }),
     new HappyPack({
       id: 'styles',
+      cache: true,
       threadPool: happyThreadPool,
       loaders: ['style-loader', 'css-loader', 'less-loader', 'postcss-loader']
     }),

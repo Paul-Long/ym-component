@@ -16,6 +16,7 @@ class Result {
     this.result.status = 400;
     this.result.content = null;
     this.result.message = message;
+    return this.result;
   }
 }
 

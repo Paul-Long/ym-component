@@ -28,7 +28,12 @@ if (ENV === 'develpoment') {
   app.use(webpackDevMiddleWare(compiler, {
     noInfo: true,
     publicPath: webpackConfig.output.publicPath,
-    serverSideRender: true
+    serverSideRender: true,
+    aggregateTimeout: 300,
+    poll: true,
+    stats: {
+      chunks: false
+    }
   }));
   app.use(webpackHotMiddleWare(compiler));
 }
@@ -36,7 +41,8 @@ route(app);
 app.use(express.static(webpackConfig.output.path));
 app.use(function (req, res, next) {
   const url = req.originalUrl;
-  if (url !== '/login' && !req.session.user) {
+  console.log('Session user : ', req.session.user);
+  if (url !== '/' && !req.session.user) {
     return res.redirect('/');
   }
   res.send(render(req, res, next));

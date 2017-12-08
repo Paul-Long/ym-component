@@ -8,7 +8,7 @@
   },
   "betterScripts": {
     "start": {
-      "command": "node index.js",
+      "command": "supervisor --watch ./src/server index.js",
       "env": {
         "NODE_ENV": "develpoment"
       }

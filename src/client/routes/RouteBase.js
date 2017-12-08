@@ -3,15 +3,21 @@ import {Route} from 'react-router-dom';
 import Bundle from './Bundle';
 
 class RouteBase extends React.Component {
-  r_component = (props, parent, component) => {
+  load = (component) => {
+    switch (this.props.parent) {
+      case 'examples':
+        return import(`@examples/${component}/index.js`);
+      case 'blog':
+        return import(`@blog/${component}/index.js`);
+      case 'admin':
+        return import(`@admin/${component}/index.js`);
+      default:
+        return null;
+    }
+  };
+  r_component = (props, component) => {
     return (
-      <Bundle load={() => {
-        if (parent === 'examples') {
-          return import(`@examples/${component}/index.js`);
-        } else if (parent === 'blog') {
-          return import(`@blog/${component}/index.js`);
-        }
-      }}>
+      <Bundle load={this.load.bind(this, component)}>
         {(COM) => <COM {...props} />}
       </Bundle>
     )
@@ -20,10 +26,11 @@ class RouteBase extends React.Component {
     const {parent = ''} = this.props;
     (menus || []).forEach(m => {
       if ('path' in m) {
-        routes.push(<Route key={m.path}
-                           path={'/' + parent + m.path}
-                           exact
-                           component={(props) => this.r_component(props, parent, m.component)}
+        routes.push(
+          <Route key={m.path}
+                 path={'/' + parent + m.path}
+                 exact
+                 component={(props) => this.r_component(props, m.component)}
         />);
       }
       let children = m.children || [];

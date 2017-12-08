@@ -4,12 +4,14 @@ import './Logo.less';
 
 class Logo extends React.Component {
   render() {
+    const {color} = this.props;
     return (
-      <div className='ym-logo'><Link to='/ym' replace>YM</Link></div>
+      <div className='ym-logo' style={{color}}><Link to='/ym' replace>YM</Link></div>
     )
   }
 }
 export default Logo;
 Logo.defaultProps = {
-  prefixCls: 'ym-logo'
+  prefixCls: 'ym-logo',
+  color: 'black'
 };

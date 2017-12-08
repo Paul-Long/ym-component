@@ -8,4 +8,6 @@ router.use(function timeLog(req, res, next) {
   next();
 });
 router.post('/login', UserController.login);
+router.get('/logout', UserController.logout);
+router.post('/list', UserController.list);
 export default router;
