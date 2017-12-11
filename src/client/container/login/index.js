@@ -24,7 +24,7 @@ class Login extends React.Component {
     if (!user.get('password')) {
       return message.error('请输入密码');
     }
-    post('/api/user/login', this.state.user.toJS())
+    post('/api/account/login', this.state.user.toJS())
       .then(result => {
         Result.parse(result)
           .success((result) => {

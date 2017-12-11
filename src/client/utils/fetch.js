@@ -59,3 +59,15 @@ export async function put(url, body) {
     console.error('fetch put error : ', err);
   }
 }
+
+export async function del(url, body) {
+  try {
+    return await callFetch(url, {
+      method: 'delete',
+      headers: baseHeaders,
+      body: JSON.stringify(body)
+    });
+  } catch (err) {
+    console.error('fetch put error : ', err);
+  }
+}

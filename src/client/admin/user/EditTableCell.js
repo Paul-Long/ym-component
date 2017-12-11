@@ -1,5 +1,7 @@
 import React from 'react';
-import {Icon, Input} from 'antd';
+import {Icon, Input, message} from 'antd';
+import {put} from 'app@utils/fetch';
+import Result from 'app@utils/Result';
 
 class EditTableCell extends React.Component {
   state = {
@@ -8,19 +10,26 @@ class EditTableCell extends React.Component {
   };
   handleChange = (e) => {
     const value = e.target.value;
-    this.setState({ value });
+    this.setState({value});
   };
   check = () => {
-    this.setState({ editable: false });
-    if (this.props.onChange) {
-      this.props.onChange(this.state.value);
-    }
+    const self = this;
+    const {data = {}, onChange} = this.props;
+    put('/api/user', {userName: this.state.value, _id: data._id})
+      .then(result => {
+        Result.parse(result)
+          .success(result => {
+            (result.message) && message.success(result.message);
+            self.setState({editable: false});
+            (typeof onChange === 'function') && onChange(result);
+          });
+      });
   };
   edit = () => {
-    this.setState({ editable: true });
+    this.setState({editable: true});
   };
   render() {
-    const { value, editable } = this.state;
+    const {value, editable} = this.state;
     return (
       <div className='flex-row'>
         {

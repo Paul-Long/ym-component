@@ -7,7 +7,7 @@ class Account extends React.Component {
   h_click = ({key}) => {
     const {history} = this.props;
     if (key === 'logout') {
-      get('/api/user/logout')
+      get('/api/account/logout')
         .then(result => {
           Result.parse(result)
             .success(res => {
@@ -20,6 +20,7 @@ class Account extends React.Component {
   r_menu = () => {
     return (
       <Menu onClick={this.h_click}>
+        <Menu.Item key='changePassword'>更改密码</Menu.Item>
         <Menu.Item key='logout'>登出</Menu.Item>
       </Menu>
     )

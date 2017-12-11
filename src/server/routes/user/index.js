@@ -1,13 +1,11 @@
 import express from 'express';
-import UserController from '../../controller/user';
+import user from '../../controller/user';
 
 const router = express.Router();
 
-router.use(function timeLog(req, res, next) {
-  console.log('User Router Time : ', Date.now());
-  next();
-});
-router.post('/login', UserController.login);
-router.get('/logout', UserController.logout);
-router.post('/list', UserController.list);
+router.get('/', user.list);
+router.post('/', user.save);
+router.put('/', user.update);
+router.delete('/', user.delete);
+
 export default router;

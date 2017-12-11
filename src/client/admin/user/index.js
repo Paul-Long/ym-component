@@ -1,9 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
-import {Button, Layout, Table} from 'antd';
-import {post} from 'app@utils/fetch';
+import {Divider, Icon, Layout, message, Table} from 'antd';
+import Edit from './Edit';
+import {del, get} from 'app@utils/fetch';
 import Result from 'app@utils/Result';
 import EditTableCell from './EditTableCell';
+import {utcToLocal} from 'app@utils/Time';
 
 const {Header, Content} = Layout;
 
@@ -18,10 +20,22 @@ class UserList extends React.Component {
 
   load = () => {
     const self = this;
-    post('/api/user/list', {})
+    get('/api/user')
       .then(result => {
         Result.parse(result)
           .success(res => self.setState({dataSource: res.content}))
+      });
+  };
+
+  h_delete = _id => {
+    const self = this;
+    del('/api/user', {_id})
+      .then(result => {
+        Result.parse(result)
+          .success(res => {
+            res.message && message.success(res.message);
+            self.load();
+          })
       });
   };
 
@@ -32,13 +46,14 @@ class UserList extends React.Component {
         dataIndex: 'userName',
         key: 'userName',
         width: '30%',
-        render: (text, record) => <EditTableCell value={text} />
+        render: (text, record) => <EditTableCell value={text} data={record} />
       },
       {
         title: '创建时间',
         dataIndex: 'createTime',
         key: 'createTime',
-        width: '30%'
+        width: '30%',
+        render: text => utcToLocal(text)
       },
       {
         title: '操作',
@@ -46,8 +61,9 @@ class UserList extends React.Component {
         render: (text, record) => {
           return (
             <div className='flex-row'>
-              <Button>修改</Button>
-              <Button>删除</Button>
+              <a href='#' onClick={this.h_delete.bind(this, record._id)} style={{color: 'red'}}>delete</a>
+              <Divider type='vertical' />
+              <a onClick={this.h_delete.bind(this, record._id)}>more <Icon type='down' /></a>
             </div>
           )
         }
@@ -60,8 +76,8 @@ class UserList extends React.Component {
     const cls = classNames(prefixCls);
     return (
       <Layout className={cls}>
-        <Header style={{background: 'white', color: 'black'}}>
-          <h2>header</h2>
+        <Header style={{background: 'white', color: 'black'}} className='flex-row'>
+          <Edit />
         </Header>
         <Content style={{paddingLeft: '3px'}}>
           <Table rowKey='_id'
