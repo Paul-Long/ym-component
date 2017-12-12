@@ -21,6 +21,9 @@ const render = (req, res, next) => {
 <head>
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
   <title>YM APP</title>
+  <script>
+    window.sessionStorage.user = "${req.session.user}"
+  </script>
   ${css.map(path => `<link rel="stylesheet" href="/${path}" />`).join('\n') }
   </head>
   <body>

@@ -26,12 +26,12 @@ class Login extends React.Component {
     }
     post('/api/account/login', this.state.user.toJS())
       .then(result => {
-        Result.parse(result)
-          .success((result) => {
+        Result(result).success((result) => {
             (result.message) && message.success(result.message);
+            console.log(result);
+            window.sessionStorage.user = result.content.userName;
             history.push('/ym');
-          })
-          .error();
+          }).error();
       });
   };
   h_change = (user) => {

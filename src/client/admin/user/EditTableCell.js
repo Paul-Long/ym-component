@@ -17,7 +17,7 @@ class EditTableCell extends React.Component {
     const {data = {}, onChange} = this.props;
     put('/api/user', {userName: this.state.value, _id: data._id})
       .then(result => {
-        Result.parse(result)
+        Result(result)
           .success(result => {
             (result.message) && message.success(result.message);
             self.setState({editable: false});

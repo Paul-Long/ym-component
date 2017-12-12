@@ -2,12 +2,12 @@ import React from 'react';
 import {message} from 'antd';
 
 class Result {
-  constructor() {
+  constructor(result, showErr = true) {
     this.result = null;
-    this.showErr = true;
     this.parse.bind(this);
     this.success.bind(this);
     this.error.bind(this);
+    this.parse(result, showErr);
   }
 
   parse(result = {}, showErr = true) {
@@ -36,4 +36,4 @@ class Result {
   }
 }
 
-export default new Result();
+export default ((result, showErr = true) => new Result(result, showErr));

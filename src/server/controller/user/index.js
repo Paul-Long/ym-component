@@ -13,7 +13,7 @@ class UserController {
   async list(req, res, next) {
     const form = new formidable.IncomingForm();
     form.parse(req, async (err, fields) => {
-      const users = await User.find({});
+      const users = await User.find({del: false});
       res.send(Result.success(users));
     });
   }
@@ -45,10 +45,10 @@ class UserController {
         Object.assign({}, fields, {
           updateTime: new Date(),
           createTime: new Date(),
+          password: '123456',
           del: false
         }));
       user = await user.save();
-      console.log(user);
       res.send(Result.success(user, '保存成功'));
     });
 

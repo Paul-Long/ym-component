@@ -22,8 +22,7 @@ class UserList extends React.Component {
     const self = this;
     get('/api/user')
       .then(result => {
-        Result.parse(result)
-          .success(res => self.setState({dataSource: res.content}))
+        Result(result).success(res => self.setState({dataSource: res.content}))
       });
   };
 
@@ -31,8 +30,7 @@ class UserList extends React.Component {
     const self = this;
     del('/api/user', {_id})
       .then(result => {
-        Result.parse(result)
-          .success(res => {
+        Result(result).success(res => {
             res.message && message.success(res.message);
             self.load();
           })

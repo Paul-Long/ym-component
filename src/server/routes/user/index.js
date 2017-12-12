@@ -3,9 +3,11 @@ import user from '../../controller/user';
 
 const router = express.Router();
 
-router.get('/', user.list);
-router.post('/', user.save);
-router.put('/', user.update);
-router.delete('/', user.delete);
+
+router.route('/')
+  .get(user.list)
+  .post(user.save)
+  .put(user.update)
+  .delete(user.delete);
 
 export default router;

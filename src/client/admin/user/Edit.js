@@ -23,13 +23,16 @@ class Edit extends React.Component {
     if (!user.get('userName')) {
       return message.error('请填写用户名');
     }
+    const self = this;
+    const {onSuccess} = this.props;
     this.setState({loading: true}, () => {
       post('/api/user', user.toJS())
         .then(result => {
-          Result.parse(result)
-            .success(result => {
-              (result.message) && message.success(result.message);
-            })
+          Result(result).success(result => {
+            result.message && message.success(result.message);
+            self.setState({loading: false, visible: false, user: Immutable.fromJS({})});
+            (typeof onSuccess === 'function') && onSuccess();
+          });
         });
     });
   };

@@ -1,6 +1,14 @@
 const config = {
   port: 3389,
-  dbUrl: 'mongodb://admin:123456@106.14.157.178:27017/ym-db',
+  dbUri: 'mongodb://106.14.157.178:27017/ym-db',
+  db: {
+    user: 'admin',
+    pass: '123456',
+    server: {poolSize: 5, auto_reconnect:true},
+    config: {autoIndex: false},
+    useMongoClient: true
+
+  },
   session: {
     name: 'SID',
     secret: 'SID',
