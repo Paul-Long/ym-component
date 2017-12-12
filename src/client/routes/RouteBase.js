@@ -11,6 +11,8 @@ class RouteBase extends React.Component {
         return import(`@blog/${component}/index.js`);
       case 'admin':
         return import(`@admin/${component}/index.js`);
+      case 'bookmark':
+        return import(`@bookmark/${component}/index.js`);
       default:
         return null;
     }
