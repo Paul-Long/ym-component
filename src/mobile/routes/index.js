@@ -1,13 +1,14 @@
 import React from 'react';
-import {BrowserRouter} from 'react-router-dom';
-import {Button} from 'antd-mobile';
-import './style.less';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import App from 'm@container/app';
+import Home from 'm@container/home';
 
 export default (() => (
   <BrowserRouter>
-    <div>
-      <h1>Mobile</h1>
-      <Button>提交</Button>
-    </div>
+    <App>
+      <Switch>
+        <Route path='/mobile/home' exact component={Home} />
+      </Switch>
+    </App>
   </BrowserRouter>
 ));

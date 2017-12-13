@@ -1,10 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
 import AppItem from './AppItem';
-import RouteBase from 'routes/RouteBase';
 import './style.less';
 
-class YmApp extends RouteBase {
+class YmApp extends React.Component {
   render() {
     const {prefixCls = ''} = this.props;
     const cls = classNames([prefixCls, 'flex-row']);

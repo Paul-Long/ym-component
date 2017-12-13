@@ -3,11 +3,11 @@ import {Layout} from 'components';
 import AppMenu from './AppMenu';
 import AppHeader from './AppHeader';
 import AppFooter from './AppFooter';
-import RouteBase from 'routes/RouteBase';
 import menus from './menus';
+import {route} from 'utils/RouteUtil';
 import './style.less';
 
-class ExamplesApp extends RouteBase {
+class ExamplesApp extends React.Component {
   render() {
     const {prefixCls} = this.props;
     return (
@@ -20,7 +20,7 @@ class ExamplesApp extends RouteBase {
           <Layout.Content>
             <Layout>
               <Layout.Content className={`${prefixCls}-content`}>
-                {this.route(menus)}
+                {route(menus, 'examples')}
               </Layout.Content>
               <AppFooter />
             </Layout>
@@ -34,6 +34,5 @@ class ExamplesApp extends RouteBase {
 export default ExamplesApp;
 
 ExamplesApp.defaultProps = {
-  parent: 'examples',
   prefixCls: 'ym-examples'
 };

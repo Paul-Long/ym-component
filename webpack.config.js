@@ -41,7 +41,10 @@ const config = {
       '@examples': path.resolve(__dirname, client, 'examples'),
       '@blog': path.resolve(__dirname, client, 'blog'),
       '@bookmark': path.resolve(__dirname, client, 'bookmark'),
-      '@admin': path.resolve(__dirname, client, 'admin')
+      '@admin': path.resolve(__dirname, client, 'admin'),
+      'mobile': path.resolve(__dirname, mobile),
+      'm@container': path.resolve(__dirname, mobile, 'container'),
+      'utils': path.resolve(__dirname, 'src/utils')
     }
   },
   module: {
@@ -53,6 +56,7 @@ const config = {
           path.resolve(__dirname, client),
           path.resolve(__dirname, mobile),
           path.resolve(__dirname, server),
+          path.resolve(__dirname, 'src/utils'),
           path.resolve(__dirname, './src/components')
         ],
         use: 'happypack/loader?id=js'

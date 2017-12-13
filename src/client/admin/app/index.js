@@ -5,12 +5,12 @@ import Logo from 'app@components/logo';
 import Account from 'app@components/account';
 import AdminMenu from './AdminMenu';
 import menus from './menus';
+import {route} from 'utils/RouteUtil';
 import './style.less';
-import RouteBase from 'routes/RouteBase';
 
 const {Content, Header, Sider} = Layout;
 
-class Admin extends RouteBase {
+class Admin extends React.Component {
   render() {
     const {prefixCls, history} = this.props;
     const cls = classNames(prefixCls);
@@ -25,7 +25,7 @@ class Admin extends RouteBase {
             <AdminMenu />
           </Sider>
           <Content>
-            {this.route(menus)}
+            {route(menus, 'admin')}
           </Content>
         </Layout>
       </Layout>
@@ -36,6 +36,5 @@ class Admin extends RouteBase {
 export default Admin;
 
 Admin.defaultProps = {
-  prefixCls: 'ym-admin',
-  parent: 'admin'
+  prefixCls: 'ym-admin'
 };

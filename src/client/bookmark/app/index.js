@@ -1,18 +1,18 @@
 import React from 'react';
 import {Layout} from 'antd';
 import BookmarkHeader from './BookmarkHeader';
-import RouteBase from 'routes/RouteBase';
 import menus from './menus';
+import {route} from 'utils/RouteUtil';
 import './style.less';
 
-class Bookmark extends RouteBase {
+class Bookmark extends React.Component {
   render() {
     const {prefixCls} = this.props;
     return (
       <Layout className={prefixCls}>
         <BookmarkHeader onNew={() => console.log('new')} />
         <Layout.Content>
-          {this.route(menus)}
+          {route(menus, 'bookmark')}
         </Layout.Content>
       </Layout>
     )
@@ -21,6 +21,5 @@ class Bookmark extends RouteBase {
 
 export default Bookmark;
 Bookmark.defaultProps = {
-  prefixCls: 'ym-bookmark',
-  parent: 'bookmark'
+  prefixCls: 'ym-bookmark'
 };
