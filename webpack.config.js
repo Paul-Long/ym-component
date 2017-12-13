@@ -2,21 +2,23 @@ const webpack = require('webpack');
 const path = require('path');
 const cpus = require('os').cpus().length;
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HappyPack = require('happypack');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const happyThreadPool = HappyPack.ThreadPool({size: cpus});
 const UglifyParallel = require('webpack-uglify-parallel');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const ENV = process.env.NODE_ENV;
 const client = 'src/client';
+const mobile = 'src/mobile';
 const server = 'src/server';
 const config = {
   cache: true,
   entry: {
     main: path.resolve(__dirname, client, 'app.js'),
+    mobile: path.resolve(__dirname, mobile, 'mobile.js'),
     vendor: ['react', 'react-dom', 'react-router-dom']
   },
   output: {
@@ -49,6 +51,7 @@ const config = {
         exclude: /node_modules/,
         include: [
           path.resolve(__dirname, client),
+          path.resolve(__dirname, mobile),
           path.resolve(__dirname, server),
           path.resolve(__dirname, './src/components')
         ],
@@ -105,18 +108,9 @@ const config = {
       threadPool: happyThreadPool,
       loaders: ['style-loader', 'css-loader', 'less-loader', 'postcss-loader']
     }),
-    new HtmlWebpackPlugin({
-      title: 'YM APP',
-      favicon: './src/server/static/images/favicon.ico',
-      template: path.join(__dirname, 'src/server/template/index.html'),
-      chunks: ['manifest', 'vendor', 'common', 'main'],
-      chunksSortMode: function (chunk1, chunk2) {
-        const order = ['manifest', 'common', 'vendor', 'main'];
-        const order1 = order.indexOf(chunk1.names[0]);
-        const order2 = order.indexOf(chunk2.names[0]);
-        return order1 - order2;
-      }
-    })
+    new CopyWebpackPlugin([{
+      from: __dirname + '/src/server/static/images/favicon.ico'
+    }])
   ]
 };
 if (ENV === 'develpoment') {

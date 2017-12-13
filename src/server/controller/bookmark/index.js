@@ -21,7 +21,6 @@ class BookmarkController {
     const form = new formidable.IncomingForm();
     form.parse(req, async (err, fields) => {
       const bookmarks = await Bookmark.find({});
-      console.log(bookmarks);
       res.send(Result.success(bookmarks));
     });
   }

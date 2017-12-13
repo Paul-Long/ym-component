@@ -1,12 +1,9 @@
 import React from 'react';
 import Logo from 'app@components/logo';
-import {Menu, Layout} from 'antd';
+import {Layout, Menu} from 'antd';
 import {Link} from 'react-router-dom';
 
 export default ((props) => {
-  state = {
-    path: '/bookmark'
-  };
   return (
     <Layout.Header className='flex-row'>
       <Logo color='#f56a00' />

@@ -7,7 +7,7 @@ import connectMongo from 'connect-mongo';
 import cookieParser from 'cookie-parser';
 import db from './mongodb/db';
 import route from './routes';
-import render from './template/render';
+import render, {renderMobile} from './template/render';
 
 const app = express();
 const MongoStore = connectMongo(session);
@@ -44,6 +44,13 @@ app.use(function (req, res, next) {
   console.log('Session user : ', req.session.user);
   if (url !== '/' && !req.session.user) {
     return res.redirect('/');
+  }
+  next();
+});
+app.get('/**', (req, res, next) => {
+  const url = req.originalUrl;
+  if (url.startsWith('/mobile')) {
+    return res.send(renderMobile(req, res, next));
   }
   res.send(render(req, res, next));
 });
