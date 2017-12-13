@@ -1,10 +1,14 @@
 const order = ['manifest', 'common', 'vendor', 'main'];
 const mobileOrder = ['manifest', 'common', 'vendor', 'mobile'];
+const ENV = process.env.NODE_ENV;
+
 const toArray = (chunk) => {
   return Array.isArray(chunk) ? chunk : [chunk];
 };
-const render = (req, res, next) => {
-  const chunks = res.locals.webpackStats.toJson().assetsByChunkName || {};
+const render = (req, res, next, chunks) => {
+  if (ENV === 'develpoment') {
+    chunks = res.locals.webpackStats.toJson().assetsByChunkName || {};
+  }
   let js = [], css = [];
   order.forEach(key => {
     let chunk = chunks[key] || [];
@@ -37,9 +41,10 @@ const render = (req, res, next) => {
   `
 };
 
-export function renderMobile(req, res, next) {
-  const chunks = res.locals.webpackStats.toJson().assetsByChunkName || {};
-  console.log(chunks);
+function renderMobile(req, res, next, chunks) {
+  if (ENV === 'develpoment') {
+    chunks = res.locals.webpackStats.toJson().assetsByChunkName || {};
+  }
   let js = [], css = [];
   mobileOrder.forEach(key => {
     let chunk = chunks[key] || [];
@@ -84,4 +89,9 @@ export function renderMobile(req, res, next) {
   `
 }
 
-export default render;
+export default (url, req, res, next, chunks) => {
+  if (url.startsWith('/mobile')) {
+    return renderMobile(req, res, next, chunks);
+  }
+  return render(req, res, next, chunks);
+}

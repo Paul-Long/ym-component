@@ -7,11 +7,13 @@ import connectMongo from 'connect-mongo';
 import cookieParser from 'cookie-parser';
 import db from './mongodb/db';
 import route from './routes';
-import render, {renderMobile} from './template/render';
+import render from './template/render';
+import fs from 'fs';
 
 const app = express();
 const MongoStore = connectMongo(session);
 const ENV = process.env.NODE_ENV;
+let chunks = [];
 
 app.use(cookieParser(config.session.secret, config.cookie));
 app.use(session({
@@ -36,6 +38,8 @@ if (ENV === 'develpoment') {
     }
   }));
   app.use(webpackHotMiddleWare(compiler));
+} else {
+  chunks = JSON.parse(fs.readFileSync(webpackConfig.output.path + '/chunkNames.json'));
 }
 route(app);
 app.use(express.static(webpackConfig.output.path));
@@ -43,16 +47,13 @@ app.use(function (req, res, next) {
   const url = req.originalUrl;
   console.log('Session user : ', req.session.user);
   if (url !== '/' && !req.session.user) {
-    res.redirect('/');
+    return res.redirect('/');
   }
-  res.send(render(req, res, next));
+  next();
 });
 app.get('/**', (req, res, next) => {
   const url = req.originalUrl;
-  if (url.startsWith('/mobile')) {
-    return res.send(renderMobile(req, res, next));
-  }
-  res.send(render(req, res, next));
+  res.send(render(url, req, res, next, chunks));
 });
 
 const server = app.listen(config.port, function () {

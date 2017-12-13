@@ -133,7 +133,12 @@ if (ENV === 'production') {
       drop_debugger: true
     }
   });
-  config.plugins.push(UglifyJs);
+  config.plugins.push(UglifyJs,
+    function () {
+      this.plugin('done', function (stats) {
+        require('fs').writeFileSync(path.join(config.output.path, '/chunkNames.json'), JSON.stringify(stats.toJson().assetsByChunkName, null, 4));
+      })
+    });
 
   //const isTest = true;
   //if (isTest) {

@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "start": "better-npm-run start",
+    "start:prod": "better-npm-run start:prod",
     "build:dev": "better-npm-run build:dev",
     "deploy": "better-npm-run deploy"
   },
@@ -11,6 +12,12 @@
       "command": "node index.js",
       "env": {
         "NODE_ENV": "develpoment"
+      }
+    },
+    "start:prod": {
+      "command": "node index.js",
+      "env": {
+        "NODE_ENV": "production"
       }
     },
     "deploy": {
