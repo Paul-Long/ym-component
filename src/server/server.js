@@ -45,7 +45,7 @@ app.use(function (req, res, next) {
   if (url !== '/' && !req.session.user) {
     return res.redirect('/');
   }
-  next();
+  res.send(render(req, res, next));
 });
 app.get('/**', (req, res, next) => {
   const url = req.originalUrl;
