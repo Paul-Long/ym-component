@@ -43,7 +43,7 @@ app.use(function (req, res, next) {
   const url = req.originalUrl;
   console.log('Session user : ', req.session.user);
   if (url !== '/' && !req.session.user) {
-    return res.redirect('/');
+    res.redirect('/');
   }
   res.send(render(req, res, next));
 });
