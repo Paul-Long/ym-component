@@ -17,7 +17,7 @@ db.on('error', function (error) {
 
 db.on('close', function () {
   console.log('db disconnect, try reconnect.');
-  mongoose.connect(config.url, config.db);
+  mongoose.connect(config.dbUri, config.db);
 });
 
 

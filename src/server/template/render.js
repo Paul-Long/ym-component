@@ -1,16 +1,13 @@
 const order = ['manifest', 'common', 'vendor', 'main'];
 const mobileOrder = ['manifest', 'common', 'vendor', 'mobile'];
-const ENV = process.env.NODE_ENV;
 
 const toArray = (chunk) => {
   return Array.isArray(chunk) ? chunk : [chunk];
 };
-const render = (req, res, next, chunks) => {
-  if (ENV === 'develpoment') {
-    chunks = res.locals.webpackStats.toJson().assetsByChunkName || {};
-  }
+
+function getChunks(chunks, source) {
   let js = [], css = [];
-  order.forEach(key => {
+  source.forEach(key => {
     let chunk = chunks[key] || [];
     chunk = toArray(chunk);
     chunk.forEach(path => {
@@ -21,6 +18,11 @@ const render = (req, res, next, chunks) => {
       }
     });
   });
+  return {js, css};
+}
+
+const render = (user, chunks) => {
+  const {js = [], css = []} = getChunks(chunks, order);
   return `
 <html>
 <head>
@@ -29,7 +31,7 @@ const render = (req, res, next, chunks) => {
   <meta name="theme-color" content="#000000">
   <title>YM APP</title>
   <script>
-    window.sessionStorage.user = "${req.session.user}"
+    window.sessionStorage.user = "${user}"
   </script>
   ${css.map(path => `<link rel="stylesheet" href="/${path}" />`).join('\n') }
   </head>
@@ -41,22 +43,8 @@ const render = (req, res, next, chunks) => {
   `
 };
 
-function renderMobile(req, res, next, chunks) {
-  if (ENV === 'develpoment') {
-    chunks = res.locals.webpackStats.toJson().assetsByChunkName || {};
-  }
-  let js = [], css = [];
-  mobileOrder.forEach(key => {
-    let chunk = chunks[key] || [];
-    chunk = toArray(chunk);
-    chunk.forEach(path => {
-      if (path.endsWith('.js')) {
-        js.push(path);
-      } else if (path.endsWith('.css')) {
-        css.push(path);
-      }
-    });
-  });
+function renderMobile(user, chunks) {
+  const {js = [], css = []} = getChunks(chunks, mobileOrder);
   return `
 <html>
 <head>
@@ -66,7 +54,7 @@ function renderMobile(req, res, next, chunks) {
   <link rel="shortcut icon" href="/favicon.ico">
   <title>YM MOBILE</title>
   <script>
-    window.sessionStorage.user = "${req.session.user}"
+    window.sessionStorage.user = "${user}"
   </script>
   <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
   <script>
@@ -89,9 +77,10 @@ function renderMobile(req, res, next, chunks) {
   `
 }
 
-export default (url, req, res, next, chunks) => {
+export default (req, chunks) => {
+  const url = req.originalUrl;
   if (url.startsWith('/mobile')) {
-    return renderMobile(req, res, next, chunks);
+    return renderMobile(req.session.user, chunks);
   }
-  return render(req, res, next, chunks);
+  return render(req.session.user, chunks);
 }

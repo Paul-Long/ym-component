@@ -12,7 +12,7 @@ import fs from 'fs';
 
 const app = express();
 const MongoStore = connectMongo(session);
-const ENV = process.env.NODE_ENV;
+const isDev = process.env.NODE_ENV === 'develpoment';
 let chunks = [];
 
 app.use(cookieParser(config.session.secret, config.cookie));
@@ -23,7 +23,7 @@ app.use(session({
   store: new MongoStore({mongooseConnection: db})
 }));
 
-if (ENV === 'develpoment') {
+if (isDev) {
   const webpackDevMiddleWare = require('webpack-dev-middleware');
   const webpackHotMiddleWare = require('webpack-hot-middleware');
   const compiler = webpack(webpackConfig);
@@ -46,14 +46,14 @@ app.use(express.static(webpackConfig.output.path));
 app.use(function (req, res, next) {
   const url = req.originalUrl;
   console.log('Session user : ', req.session.user);
-  if (url !== '/' && !req.session.user) {
+  if (url !== '/' && !url.startsWith('/mobile') && !req.session.user) {
     return res.redirect('/');
   }
   next();
 });
 app.get('/**', (req, res, next) => {
-  const url = req.originalUrl;
-  res.send(render(url, req, res, next, chunks));
+  isDev && (chunks = res.locals.webpackStats.toJson().assetsByChunkName || {});
+  res.send(render(req, chunks));
 });
 
 const server = app.listen(config.port, function () {
