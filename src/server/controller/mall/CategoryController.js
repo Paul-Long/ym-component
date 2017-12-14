@@ -32,7 +32,7 @@ class CategoryController {
   };
   getTree = (categories = [], group = {}) => {
     return categories.map(c => {
-      let children = group[r.parent] || [];
+      let children = group[c.parent] || [];
       if (children.length > 0) {
         children = this.getTree(children, group);
       }
