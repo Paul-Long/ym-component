@@ -2,6 +2,24 @@ import React from 'react';
 import {Carousel} from 'antd-mobile';
 
 class Home extends React.Component {
+  r_item = () => {
+    return [
+      'http://houym-1254119810.picsh.myqcloud.com/1.jpeg?imageView2/0/w/375',
+      'http://houym-1254119810.picsh.myqcloud.com/2.jpeg?imageView2/0/w/375',
+      'http://houym-1254119810.picsh.myqcloud.com/3.jpeg?imageView2/0/w/375'
+    ].map((url, index) => (
+      <div style={{
+        background: '#f5f5f5',
+        width: '100%',
+        height: '375px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }} key={index}>
+        <img src={url} alt="" style={{width: '100%'}} />
+      </div>
+    ))
+  };
   render() {
     return (
       <div>
@@ -9,32 +27,9 @@ class Home extends React.Component {
                   dots
                   dragging
                   swiping={false}
-                  autoplay
+                  autoplay={false}
         >
-          <div style={{
-            background: '#108ee9',
-            textAlign: 'center',
-            lineHeight: '200px',
-            height: '200px',
-            width: '100%'
-          }}><img src="http://houym-1254119810.picsh.myqcloud.com/WechatIMG100.jpeg?imageView2/0/w/200" alt="" />
-          </div>
-          <div style={{
-            background: '#108ee9',
-            textAlign: 'center',
-            lineHeight: '200px',
-            height: '200px',
-            width: '100%'
-          }}><img src="http://houym-1254119810.picsh.myqcloud.com/WechatIMG98.jpeg?imageView2/0/w/200" alt="" />
-          </div>
-          <div style={{
-            background: '#108ee9',
-            textAlign: 'center',
-            lineHeight: '200px',
-            height: '200px',
-            width: '100%'
-          }}><img src="http://houym-1254119810.picsh.myqcloud.com/WechatIMG99.jpeg?imageView2/0/w/200" alt="" />
-          </div>
+          {this.r_item()}
         </Carousel>
       </div>
     )

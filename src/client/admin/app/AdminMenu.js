@@ -33,7 +33,7 @@ class AdminMenu extends React.Component {
     const {prefixCls, className} = this.props;
     let cls = classNames(prefixCls, className || '');
     return (
-      <Menu className={cls} mode='inline' defaultOpenKeys={['0']}>
+      <Menu className={cls} mode='inline' defaultOpenKeys={['0', '1']}>
         {this.r_sub()}
       </Menu>
     )

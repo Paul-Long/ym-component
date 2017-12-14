@@ -78,7 +78,7 @@ class Account extends React.Component {
     return (
       <div>
         <Dropdown overlay={this.r_menu()}>
-          <a>{window.sessionStorage.user || ''} <Icon type='down' /></a>
+          <a style={{display: 'block', height: '100%'}}>{window.sessionStorage.user || ''} <Icon type='down' /></a>
         </Dropdown>
         <Modal
           visible={visible}
