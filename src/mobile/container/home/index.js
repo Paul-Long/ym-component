@@ -9,7 +9,7 @@ class Home extends React.Component {
                   dots
                   dragging
                   swiping={false}
-                  autoplay={false}
+                  autoplay
         >
           <div style={{
             background: '#108ee9',
