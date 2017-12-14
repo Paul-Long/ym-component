@@ -1,6 +1,7 @@
 import formidable from 'formidable';
 import Category from '../../models/mall/Category';
 import Result from '../../utils/Result';
+import * as _ from 'lodash';
 
 class CategoryController {
   save = async (req, res, next) => {
@@ -25,13 +26,18 @@ class CategoryController {
   };
   list = async (req, res, next) => {
     const categories = await Category.find({});
-    const trees = await Category.aggregate().group({_id: '$parent'});
-    console.log(trees);
-    res.send(Result.success(categories));
+    const group = _.groupBy(categories, 'parent');
+    const trees = this.getTree(group['root'], group);
+    res.send(Result.success(trees));
   };
-  getTree = (categories = []) => {
+  getTree = (categories = [], group = {}) => {
     return categories.map(c => {
-      console.log()
+      let children = group[r.parent] || [];
+      if (children.length > 0) {
+        children = this.getTree(children, group);
+      }
+      c.children = children;
+      return c;
     })
   }
 }
