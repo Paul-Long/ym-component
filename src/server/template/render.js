@@ -1,5 +1,5 @@
-const order = ['manifest', 'common', 'vendor', 'main'];
-const mobileOrder = ['manifest', 'common', 'vendor', 'mobile'];
+const order = ['manifest', 'common', 'common-main', 'vendor', 'main'];
+const mobileOrder = ['manifest', 'common', 'common-mobile', 'vendor', 'mobile'];
 
 const toArray = (chunk) => {
   return Array.isArray(chunk) ? chunk : [chunk];
