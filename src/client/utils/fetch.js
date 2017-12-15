@@ -7,67 +7,51 @@ const baseHeaders = {
   'Content-Type': 'application/json'
 };
 
-function callFetch(url, options) {
-  const finalOptions = Object.assign({credentials: 'include'}, options);
-  return fetchApi(url, finalOptions)
-    .then(res => res.json())
-    .then(json => json)
-    .catch(error => {
-      throw error
-    });
-}
-
-export async function fetch(url, options) {
-  try {
-    return callFetch(url, options);
-  } catch (err) {
-    throw err;
+class Fetch {
+  constructor(api) {
+    this.api = api;
+    this.headers = baseHeaders;
   }
-}
 
-export async function get(url) {
-  try {
-    return await callFetch(url, {
-      method: 'get',
-      headers: baseHeaders
-    });
-  } catch (err) {
-    console.error('fetch get error : ', err);
-  }
-}
+  header = (headers) => {
+    this.headers = Object.assign({}, this.headers, headers);
+    return this;
+  };
 
-export async function post(url, body) {
-  try {
-    return await callFetch(url, {
+  fetch = (options) => {
+    try {
+      const finalOptions = Object.assign({credentials: 'include', headers: this.headers}, options);
+      return fetchApi(this.api, finalOptions)
+        .then(res => res.json())
+        .then(json => json)
+        .catch(error => {
+          throw error
+        });
+    } catch (err) {
+      console.error(`fetch ${options.method} error : `, err);
+    }
+  };
+  get = async () => {
+    return await this.fetch({method: 'get'});
+  };
+  post = async (body) => {
+    return await this.fetch({
       method: 'post',
-      headers: baseHeaders,
       body: JSON.stringify(body)
     });
-  } catch (err) {
-    console.error('fetch post error : ', err);
-  }
-}
-
-export async function put(url, body) {
-  try {
-    return await callFetch(url, {
-      method: 'put',
-      headers: baseHeaders,
-      body: JSON.stringify(body)
-    });
-  } catch (err) {
-    console.error('fetch put error : ', err);
-  }
-}
-
-export async function del(url, body) {
-  try {
-    return await callFetch(url, {
+  };
+  delete = async (body) => {
+    return await this.fetch({
       method: 'delete',
-      headers: baseHeaders,
       body: JSON.stringify(body)
     });
-  } catch (err) {
-    console.error('fetch put error : ', err);
-  }
+  };
+  put = async (body) => {
+    return await this.fetch({
+      method: 'put',
+      body: JSON.stringify(body)
+    });
+  };
 }
+
+export default ((api) => new Fetch(api));

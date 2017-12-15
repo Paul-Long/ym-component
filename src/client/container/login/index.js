@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import {Button, Form, Icon, Input, message} from 'antd';
 import Immutable from 'immutable';
-import {post} from 'app@utils/fetch';
+import fetch from 'app@utils/fetch';
 import Result from 'app@utils/Result';
 import './style.less';
 
@@ -24,7 +24,8 @@ class Login extends React.Component {
     if (!user.get('password')) {
       return message.error('请输入密码');
     }
-    post('/api/account/login', this.state.user.toJS())
+    fetch('/api/account/login')
+      .post(this.state.user.toJS())
       .then(result => {
         Result(result).success((result) => {
             (result.message) && message.success(result.message);

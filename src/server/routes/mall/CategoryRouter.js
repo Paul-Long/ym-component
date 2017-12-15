@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.route('/')
   .get(category.list)
-  .post(category.save);
+  .post(category.save)
+  .delete(category.delete);
 
 export default router;

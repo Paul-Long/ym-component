@@ -1,5 +1,5 @@
 import React from 'react';
-import {get} from 'app@utils/fetch';
+import fetch from 'app@utils/fetch';
 import Result from 'app@utils/Result';
 import {Table} from 'antd';
 import Add from './Add';
@@ -14,7 +14,7 @@ class Home extends React.Component {
   }
 
   load = () => {
-    get('/api/bookmark')
+    fetch('/api/bookmark').get()
       .then(res => Result(res).success(res => this.setState({dataSource: res.content})));
   };
 

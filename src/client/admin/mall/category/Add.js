@@ -1,17 +1,18 @@
 import React from 'react';
-import {Button, Form, Icon, Input, message, Modal, Select} from 'antd';
-import Immutable from 'immutable';
-import {post} from 'app@utils/fetch';
+import {Button, Form, Icon, Input, message, Modal, TreeSelect} from 'antd';
+import {Map} from 'immutable';
+import fetch from 'app@utils/fetch';
+import Result from 'app@utils/Result';
 
 class Add extends React.Component {
   state = {
     visible: false,
     loading: false,
-    category: Immutable.fromJS({})
+    category: Map()
   };
 
   h_change = (data) => {
-    let category = this.state.category.merge(Immutable.fromJS(data));
+    let category = this.state.category.merge(Map(data));
     this.setState({category});
   };
 
@@ -20,12 +21,19 @@ class Add extends React.Component {
   };
 
   h_submit = () => {
-    const {category} = this.state;
+    let {category} = this.state;
     if (!category.get('name')) {
       return message.error('请填写类目名称');
     }
-    post('/api/mall/category', category.toJS())
-      .then(res => console.log(res));
+    const self = this;
+    fetch('/api/mall/category')
+      .post(category.toJS())
+      .then(res => {
+        Result(res).success(res => {
+          res.message && message.success(res.message);
+          self.setState({visible: false, loading: false, category: Map()}, self.props.onSuccess);
+        });
+      });
   };
 
   render() {
@@ -42,10 +50,10 @@ class Add extends React.Component {
     };
     return (
       <div>
-        <Button type='plus' onClick={this.h_click}><Icon type='plus' />新增</Button>
+        <Button type='primary' onClick={this.h_click}><Icon type='plus' />新增</Button>
         <Modal visible={visible}
                title='新增类目'
-               onCancel={() => this.setState({visible: false, loading: false})}
+               onCancel={() => this.setState({visible: false, loading: false, category: Map()})}
                footer={[
                  <Button key='submit'
                          type='primary'
@@ -60,11 +68,13 @@ class Add extends React.Component {
               />
             </Form.Item>
             <Form.Item label='上级类目' {...formItemLayout}>
-              <Select value={category.get('parent')}
-                      onChange={v => this.h_change({parent: v})}
-              >
-
-              </Select>
+              <TreeSelect value={category.get('parent')}
+                          dropdownStyle={{maxHeight: 400, overflow: 'auto'}}
+                          treeData={this.props.categories || []}
+                          placeholder='选择上级目录'
+                          treeDefaultExpandAll
+                          onChange={v => this.h_change({parent: v})}
+              />
             </Form.Item>
           </Form>
         </Modal>

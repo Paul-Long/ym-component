@@ -1,6 +1,6 @@
 import React from 'react';
 import {Icon, Input, message} from 'antd';
-import {put} from 'app@utils/fetch';
+import fetch from 'app@utils/fetch';
 import Result from 'app@utils/Result';
 
 class EditTableCell extends React.Component {
@@ -15,7 +15,8 @@ class EditTableCell extends React.Component {
   check = () => {
     const self = this;
     const {data = {}, onChange} = this.props;
-    put('/api/user', {userName: this.state.value, _id: data._id})
+    fetch('/api/user')
+      .post({userName: this.state.value, _id: data._id})
       .then(result => {
         Result(result)
           .success(result => {

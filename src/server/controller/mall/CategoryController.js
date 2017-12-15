@@ -32,12 +32,27 @@ class CategoryController {
   };
   getTree = (categories = [], group = {}) => {
     return categories.map(c => {
-      let children = group[c.parent] || [];
+      let children = group[c._id] || [];
       if (children.length > 0) {
         children = this.getTree(children, group);
       }
-      c.children = children;
-      return c;
+      return {
+        value: c._id,
+        key: c._id,
+        label: c.name,
+        children
+      };
+    })
+  };
+  delete = async (req, res, next) => {
+    const form = new formidable.IncomingForm();
+    form.parse(req, async (err, fields) => {
+      const ids = fields.ids || [];
+      if (ids.length === 0) {
+        return res.send(Result.error('请选择批量删除数据'));
+      }
+      await Category.remove({'_id': {$in: ids}});
+      res.send(Result.success(null, '删除成功'));
     })
   }
 }

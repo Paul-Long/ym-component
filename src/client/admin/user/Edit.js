@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Form, Icon, Input, message, Modal} from 'antd';
-import {post} from 'app@utils/fetch';
+import fetch from 'app@utils/fetch';
 import Result from 'app@utils/Result';
 import Immutable from 'immutable';
 
@@ -26,7 +26,8 @@ class Edit extends React.Component {
     const self = this;
     const {onSuccess} = this.props;
     this.setState({loading: true}, () => {
-      post('/api/user', user.toJS())
+      fetch('/api/user')
+        .post(user.toJS())
         .then(result => {
           Result(result).success(result => {
             result.message && message.success(result.message);

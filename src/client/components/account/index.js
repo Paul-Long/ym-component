@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Dropdown, Form, Icon, Input, Menu, message, Modal} from 'antd';
-import {get, post} from 'app@utils/fetch';
+import fetch from 'app@utils/fetch';
 import Result from 'app@utils/Result';
 import Immutable from 'immutable';
 
@@ -27,19 +27,17 @@ class Account extends React.Component {
       return message.error('两次密码不一致');
     }
     this.setState({loading: true}, () => {
-      post('/api/account/changePassword', {
-        userName: window.sessionStorage.user,
-        originPass: pass.get('originPass'),
-        newPass: pass.get('newPass')
-      }).then(res => {
-        Result(res).success(res => message.success(res.message));
-      });
+      fetch('/api/account/changePassword')
+        .post({userName: window.sessionStorage.user, originPass: pass.get('originPass'), newPass: pass.get('newPass')})
+        .then(res => {
+          Result(res).success(res => message.success(res.message));
+        });
     });
   };
   h_click = ({key}) => {
     const {history} = this.props;
     if (key === 'logout') {
-      get('/api/account/logout')
+      fetch('/api/account/logout').get()
         .then(result => {
           Result(result).success(res => {
               (res.message) && message.success(res.message);

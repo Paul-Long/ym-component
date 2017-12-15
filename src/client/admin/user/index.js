@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import {Divider, Icon, Layout, message, Table} from 'antd';
 import Edit from './Edit';
-import {del, get} from 'app@utils/fetch';
+import fetch from 'app@utils/fetch';
 import Result from 'app@utils/Result';
 import EditTableCell from './EditTableCell';
 import {utcToLocal} from 'app@utils/Time';
@@ -20,7 +20,7 @@ class UserList extends React.Component {
 
   load = () => {
     const self = this;
-    get('/api/user')
+    fetch('/api/user').get()
       .then(result => {
         Result(result).success(res => self.setState({dataSource: res.content}))
       });
@@ -28,7 +28,8 @@ class UserList extends React.Component {
 
   h_delete = _id => {
     const self = this;
-    del('/api/user', {_id})
+    fetch('/api/user')
+      .delete({_id})
       .then(result => {
         Result(result).success(res => {
             res.message && message.success(res.message);

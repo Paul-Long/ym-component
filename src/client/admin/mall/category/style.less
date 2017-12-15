@@ -1,0 +1,28 @@
+.ym-category-item {
+  display: inline-block;
+  width: 100px;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  background: goldenrod;
+  color: white;
+  font-size: 20px;
+  margin: 5px;
+  cursor: pointer;
+  &:focus, &:active, &.active {
+    background: gold;
+    width: 96px;
+    height: 56px;
+    margin: 7px;
+    line-height: 56px;
+  }
+  &:hover {
+    color: #f3f3f3;
+  }
+}
+
+.category-tree {
+  .ant-tree-node-content-wrapper {
+    width: calc(~'100%' - 40px);
+  }
+}
