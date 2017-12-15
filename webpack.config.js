@@ -92,8 +92,6 @@ const config = {
     new webpack.optimize.MinChunkSizePlugin({minChunkSize: 10240}),
     new webpack.optimize.OccurrenceOrderPlugin,
     new webpack.optimize.CommonsChunkPlugin({name: 'common', chunks: ['main', 'mobile', 'vendor']}),
-    new webpack.optimize.CommonsChunkPlugin({name: 'common-main', chunks: ['main', 'vendor']}),
-    new webpack.optimize.CommonsChunkPlugin({name: 'common-mobile', chunks: ['main', 'vendor']}),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       filename: 'manifest.[hash:8].[id].js',
