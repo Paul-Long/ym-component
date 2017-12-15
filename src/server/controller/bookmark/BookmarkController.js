@@ -6,10 +6,10 @@ class BookmarkController {
   save = async (req, res, next) => {
     const form = new formidable.IncomingForm();
     form.parse(req, async (err, fields) => {
-      let bookmark = await Bookmark.save(Object.assign({}, fields));
-      return res.send(Result.success(bookmark, '保存成功'));
+      let bookmark = new Bookmark(Object.assign({}, fields));
+      bookmark = await bookmark.save();
+      res.send(Result.success(bookmark, '保存成功'));
     });
-    next();
   };
 
   list = async (req, res, next) => {
@@ -19,6 +19,13 @@ class BookmarkController {
       res.send(Result.success(bookmarks));
     });
   };
+  delete = async (req, res, next) => {
+    const form = new formidable.IncomingForm();
+    form.parse(req, async (err, fields) => {
+      await Bookmark.remove({'_id': fields._id});
+      res.send(Result.success(null, '删除成功'));
+    });
+  }
 }
 
 export default new BookmarkController();

@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.route('/')
   .get(bookmark.list)
-  .post(bookmark.save);
+  .post(bookmark.save)
+  .delete(bookmark.delete);
 
 export default router;
