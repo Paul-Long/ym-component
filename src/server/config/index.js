@@ -1,8 +1,8 @@
 const config = {
   port: 3389,
-  dbUri: 'mongodb://106.14.157.178:27017/ym-db',
+  dbUri: 'mongodb://106.14.157.178:27017/houym',
   db: {
-    user: 'admin',
+    user: 'root',
     pass: '123456',
     server: {poolSize: 5, auto_reconnect:true},
     config: {autoIndex: false},
@@ -15,7 +15,7 @@ const config = {
     cookie: {
       httpOnly: true,
       secure: false,
-      maxAge: 24 * 60 * 60 * 1000,
+      maxAge: 60 * 60 * 1000,
     }
   }
 };

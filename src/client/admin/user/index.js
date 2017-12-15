@@ -62,7 +62,7 @@ class UserList extends React.Component {
             <div className='flex-row'>
               <a href='#' onClick={this.h_delete.bind(this, record._id)} style={{color: 'red'}}>delete</a>
               <Divider type='vertical' />
-              <a onClick={this.h_delete.bind(this, record._id)}>more <Icon type='down' /></a>
+              <a>more <Icon type='down' /></a>
             </div>
           )
         }

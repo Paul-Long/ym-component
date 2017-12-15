@@ -29,7 +29,6 @@ class Login extends React.Component {
       .then(result => {
         Result(result).success((result) => {
             (result.message) && message.success(result.message);
-            console.log(result);
             window.sessionStorage.user = result.content.userName;
             history.push('/ym');
           }).error();
