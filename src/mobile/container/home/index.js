@@ -23,12 +23,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <Carousel infinite
-                  dots
-                  dragging
-                  swiping={false}
-                  autoplay={false}
-        >
+        <Carousel infinite dots>
           {this.r_item()}
         </Carousel>
       </div>
