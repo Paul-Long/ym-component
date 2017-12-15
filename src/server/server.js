@@ -46,8 +46,14 @@ app.use(express.static(webpackConfig.output.path));
 app.use(function (req, res, next) {
   const url = req.originalUrl;
   console.log('Session user : ', req.session.user);
-  if (url !== '/' && !url.startsWith('/mobile') && !req.session.user) {
+  if (url.startsWith('/mobile')) {
+    return next();
+  }
+  if (url !== '/' && !req.session.user) {
     return res.redirect('/');
+  }
+  if (url === '/' && req.session.user) {
+    return res.redirect('/ym');
   }
   next();
 });

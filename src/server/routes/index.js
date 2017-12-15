@@ -1,6 +1,6 @@
 import user from './user';
 import account from './account';
-import bookmark from './bookmark';
+import bookmark from './bookmark/BookmarkRouter';
 import category from './mall/CategoryRouter';
 
 export default app => {

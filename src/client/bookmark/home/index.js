@@ -15,7 +15,9 @@ class Home extends React.Component {
 
   load = () => {
     fetch('/api/bookmark').get()
-      .then(res => Result(res).success(res => this.setState({dataSource: res.content})));
+      .then(res => Result(res)
+        .success(res => this.setState({dataSource: res.content}))
+      );
   };
 
   g_columns = () => {
@@ -43,7 +45,7 @@ class Home extends React.Component {
       <div>
         <Table dataSource={dataSource}
                columns={this.g_columns()}
-               title={() => (<Add />)}
+               title={() => (<Add onSuccess={this.load} />)}
         />
       </div>
     )
