@@ -46,7 +46,7 @@ app.use(express.static(webpackConfig.output.path));
 app.use(function (req, res, next) {
   const url = req.originalUrl;
   console.log('Session user : ', req.session.user);
-  if (url.startsWith('/mobile')) {
+  if (url.startsWith('/mobile') || url.startsWith('/api')) {
     return next();
   }
   if (url !== '/' && !req.session.user) {

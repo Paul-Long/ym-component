@@ -15,6 +15,7 @@ class UserList extends React.Component {
   };
 
   componentDidMount() {
+    fetch('/api/cos').get().then(res => console.log(res));
     this.load();
   }
 
